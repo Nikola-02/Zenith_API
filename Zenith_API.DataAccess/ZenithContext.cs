@@ -10,6 +10,7 @@ namespace Zenith_API.DataAccess
         public DbSet<MediaType> MediaTypes { get; set; }
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
+        public DbSet<Track> Tracks { get; set; }
 
         private readonly string _connectionString;
 

@@ -8,5 +8,6 @@ namespace Zenith_API.Domain
 {
     public class MediaType : NamedEntity
     {
+        public virtual ICollection<Track> Tracks { get; set; } = new HashSet<Track>();
     }
 }
