@@ -13,6 +13,7 @@ namespace Zenith_API.DataAccess
         public DbSet<Track> Tracks { get; set; }
         public DbSet<Price> Prices { get; set; }
         public DbSet<FileType> FileTypes { get; set; }
+        public DbSet<Domain.File> Files { get; set; }
 
         private readonly string _connectionString;
 

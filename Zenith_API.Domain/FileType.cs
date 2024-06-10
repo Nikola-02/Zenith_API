@@ -8,5 +8,6 @@ namespace Zenith_API.Domain
 {
     public class FileType : NamedEntity
     {
+        public virtual ICollection<File> Files { get; set; } = new HashSet<File>();
     }
 }
