@@ -8,16 +8,16 @@ using Zenith_API.Domain;
 
 namespace Zenith_API.DataAccess.Configurations
 {
-    internal class NamedEntityConfiguration<T> : EntityConfiguration<T>
-        where T : NamedEntity
+    internal abstract class NamedEntityConfiguration<T> : EntityConfiguration<T>
+    where T : NamedEntity
     {
-        protected override void ConfigureEntity(EntityTypeBuilder<T> builder)
+        public override void Configure(EntityTypeBuilder<T> builder)
         {
             base.Configure(builder);
 
             builder.Property(x => x.Name)
                    .IsRequired()
-                   .HasMaxLength(70);
+                   .HasMaxLength(30);
 
             builder.HasIndex(x => x.Name)
                    .IsUnique();

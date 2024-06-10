@@ -12,7 +12,7 @@ namespace Zenith_API.DataAccess.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<Genre> builder)
         {
-            base.ConfigureEntity(builder);
+            
         }
     }
 }

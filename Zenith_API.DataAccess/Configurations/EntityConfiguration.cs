@@ -12,7 +12,7 @@ namespace Zenith_API.DataAccess.Configurations
     internal abstract class EntityConfiguration<T> : IEntityTypeConfiguration<T>
         where T : Entity
     {
-        public void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             builder.Property(x => x.CreatedAt)
                   .HasDefaultValueSql("GETDATE()");
