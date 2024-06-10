@@ -6,6 +6,8 @@ namespace Zenith_API.DataAccess
 {
     public class ZenithContext : DbContext
     {
+        public DbSet<Genre> Genres { get; set; }
+
         private readonly string _connectionString;
 
         public ZenithContext(string connectionString)
