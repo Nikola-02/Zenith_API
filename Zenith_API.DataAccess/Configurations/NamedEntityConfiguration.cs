@@ -13,7 +13,7 @@ namespace Zenith_API.DataAccess.Configurations
     {
         protected override void ConfigureEntity(EntityTypeBuilder<T> builder)
         {
-            Configure(builder);
+            base.Configure(builder);
 
             builder.Property(x => x.Name)
                    .IsRequired()
