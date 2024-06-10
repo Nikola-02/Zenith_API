@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith_API.DataAccess;
 
@@ -11,9 +12,11 @@ using Zenith_API.DataAccess;
 namespace Zenith_API.DataAccess.Migrations
 {
     [DbContext(typeof(ZenithContext))]
-    partial class ZenithContextModelSnapshot : ModelSnapshot
+    [Migration("20240610162624_Added_Track_Table")]
+    partial class Added_Track_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,40 +96,6 @@ namespace Zenith_API.DataAccess.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("Zenith_API.Domain.FileType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("FileTypes");
-                });
-
             modelBuilder.Entity("Zenith_API.Domain.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -195,41 +164,6 @@ namespace Zenith_API.DataAccess.Migrations
                     b.ToTable("MediaTypes");
                 });
 
-            modelBuilder.Entity("Zenith_API.Domain.Price", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETDATE()");
-
-                    b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<int>("TrackId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TrackId");
-
-                    b.ToTable("Prices");
-                });
-
             modelBuilder.Entity("Zenith_API.Domain.Track", b =>
                 {
                     b.Property<int>("Id")
@@ -290,17 +224,6 @@ namespace Zenith_API.DataAccess.Migrations
                     b.ToTable("Tracks");
                 });
 
-            modelBuilder.Entity("Zenith_API.Domain.Price", b =>
-                {
-                    b.HasOne("Zenith_API.Domain.Track", "Track")
-                        .WithMany("Prices")
-                        .HasForeignKey("TrackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Track");
-                });
-
             modelBuilder.Entity("Zenith_API.Domain.Track", b =>
                 {
                     b.HasOne("Zenith_API.Domain.Album", "Album")
@@ -354,11 +277,6 @@ namespace Zenith_API.DataAccess.Migrations
             modelBuilder.Entity("Zenith_API.Domain.MediaType", b =>
                 {
                     b.Navigation("Tracks");
-                });
-
-            modelBuilder.Entity("Zenith_API.Domain.Track", b =>
-                {
-                    b.Navigation("Prices");
                 });
 #pragma warning restore 612, 618
         }

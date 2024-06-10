@@ -23,5 +23,7 @@ namespace Zenith_API.Domain
 
         public int MediaTypeId { get; set; }
         public virtual MediaType MediaType { get; set; }
+
+        public virtual ICollection<Price> Prices { get; set; } = new HashSet<Price>();
     }
 }

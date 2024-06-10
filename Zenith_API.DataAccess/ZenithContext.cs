@@ -11,6 +11,8 @@ namespace Zenith_API.DataAccess
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Track> Tracks { get; set; }
+        public DbSet<Price> Prices { get; set; }
+        public DbSet<FileType> FileTypes { get; set; }
 
         private readonly string _connectionString;
 
