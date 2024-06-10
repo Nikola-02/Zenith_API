@@ -7,6 +7,7 @@ namespace Zenith_API.DataAccess
     public class ZenithContext : DbContext
     {
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<MediaType> MediaTypes { get; set; }
 
         private readonly string _connectionString;
 

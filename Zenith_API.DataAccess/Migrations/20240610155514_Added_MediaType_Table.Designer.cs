@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Zenith_API.DataAccess;
 
@@ -11,9 +12,11 @@ using Zenith_API.DataAccess;
 namespace Zenith_API.DataAccess.Migrations
 {
     [DbContext(typeof(ZenithContext))]
-    partial class ZenithContextModelSnapshot : ModelSnapshot
+    [Migration("20240610155514_Added_MediaType_Table")]
+    partial class Added_MediaType_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
