@@ -19,6 +19,7 @@ namespace Zenith_API.DataAccess
         public DbSet<Like> Likes { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<PlaylistTrack> PlaylistTracks { get; set; }
+        public DbSet<UserUseCase> UserUseCases { get; set; }
 
         private readonly string _connectionString;
 
@@ -59,6 +60,12 @@ namespace Zenith_API.DataAccess
             {
                 x.PlaylistId,
                 x.TrackId
+            });
+
+            modelBuilder.Entity<UserUseCase>().HasKey(x => new
+            {
+                x.UserId,
+                x.UseCaseId
             });
 
             base.OnModelCreating(modelBuilder);

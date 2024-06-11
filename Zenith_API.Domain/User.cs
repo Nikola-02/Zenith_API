@@ -17,5 +17,7 @@ namespace Zenith_API.Domain
         public virtual ICollection<Like> Likes { get; set; } = new HashSet<Like>();
 
         public virtual ICollection<Playlist> Playlists { get; set; } = new HashSet<Playlist>();
+
+        public virtual ICollection<UserUseCase> UseCases { get; set; } = new HashSet<UserUseCase>();
     }
 }
