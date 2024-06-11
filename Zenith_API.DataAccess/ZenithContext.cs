@@ -21,6 +21,7 @@ namespace Zenith_API.DataAccess
         public DbSet<PlaylistTrack> PlaylistTracks { get; set; }
         public DbSet<UserUseCase> UserUseCases { get; set; }
         public DbSet<UseCaseLog> UseCaseLogs { get; set; }
+        public DbSet<ErrorLog> ErrorLogs { get; set; }
 
         private readonly string _connectionString;
 
