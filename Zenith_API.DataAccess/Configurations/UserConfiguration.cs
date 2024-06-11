@@ -40,6 +40,10 @@ namespace Zenith_API.DataAccess.Configurations
             builder.Property(x=>x.Password)
                 .IsRequired()
                 .HasMaxLength(120);
+
+            builder.HasMany(x => x.Likes)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

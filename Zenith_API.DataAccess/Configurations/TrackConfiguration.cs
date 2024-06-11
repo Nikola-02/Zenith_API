@@ -46,6 +46,10 @@ namespace Zenith_API.DataAccess.Configurations
             builder.HasMany(x => x.Files)
                 .WithMany(x => x.Tracks)
                 .UsingEntity<TrackFile>();
+
+            builder.HasMany(x => x.Likes)
+                .WithOne(x => x.Track)
+                .HasForeignKey(x => x.TrackId);
         }
     }
 }

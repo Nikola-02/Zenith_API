@@ -16,6 +16,7 @@ namespace Zenith_API.DataAccess
         public DbSet<Domain.File> Files { get; set; }
         public DbSet<TrackFile> TrackFiles { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
         private readonly string _connectionString;
 
@@ -44,6 +45,12 @@ namespace Zenith_API.DataAccess
             {
                 x.TrackId,
                 x.FileId
+            });
+
+            modelBuilder.Entity<Like>().HasKey(x => new
+            {
+                x.UserId,
+                x.TrackId
             });
 
             base.OnModelCreating(modelBuilder);
