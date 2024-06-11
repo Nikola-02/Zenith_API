@@ -1,6 +1,13 @@
+using Zenith_API.API;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var settings = new AppSettings();
+
+builder.Configuration.Bind(settings);
+
+builder.Services.AddSingleton(settings.Jwt);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,5 +26,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseStaticFiles();
 
 app.Run();
