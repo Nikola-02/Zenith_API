@@ -17,6 +17,7 @@ namespace Zenith_API.DataAccess
         public DbSet<TrackFile> TrackFiles { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Like> Likes { get; set; }
+        public DbSet<Playlist> Playlists { get; set; }
 
         private readonly string _connectionString;
 
