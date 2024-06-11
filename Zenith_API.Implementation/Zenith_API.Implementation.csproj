@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Zenith_API.Application\Zenith_API.Application.csproj" />
+    <ProjectReference Include="..\Zenith_API.DataAccess\Zenith_API.DataAccess.csproj" />
+    <ProjectReference Include="..\Zenith_API.Domain\Zenith_API.Domain.csproj" />
   </ItemGroup>
 
 </Project>
