@@ -9,7 +9,8 @@
   <ItemGroup>
     <Folder Include="DTO\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="UseCases\" />
+    <Folder Include="UseCases\Commands\" />
+    <Folder Include="UseCases\Queries\" />
   </ItemGroup>
 
 </Project>
