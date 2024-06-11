@@ -50,6 +50,10 @@ namespace Zenith_API.DataAccess.Configurations
             builder.HasMany(x => x.Likes)
                 .WithOne(x => x.Track)
                 .HasForeignKey(x => x.TrackId);
+
+            builder.HasMany(x => x.Playlists)
+                .WithMany(x => x.Tracks)
+                .UsingEntity<PlaylistTrack>();
         }
     }
 }

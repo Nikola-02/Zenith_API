@@ -12,5 +12,7 @@ namespace Zenith_API.Domain
 
         public int UserId { get; set; }
         public virtual User User { get; set; }
+
+        public virtual ICollection<Track> Tracks { get; set; } = new HashSet<Track>();
     }
 }

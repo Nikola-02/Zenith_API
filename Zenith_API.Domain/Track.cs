@@ -29,5 +29,7 @@ namespace Zenith_API.Domain
         public virtual ICollection<File> Files { get; set; } = new HashSet<File>();
 
         public virtual ICollection<Like> Likes { get; set; } = new HashSet<Like>();
+
+        public virtual ICollection<Playlist> Playlists { get; set; } = new HashSet<Playlist>();
     }
 }
