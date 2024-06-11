@@ -14,6 +14,7 @@ namespace Zenith_API.DataAccess
         public DbSet<Price> Prices { get; set; }
         public DbSet<FileType> FileTypes { get; set; }
         public DbSet<Domain.File> Files { get; set; }
+        public DbSet<TrackFile> TrackFiles { get; set; }
 
         private readonly string _connectionString;
 
@@ -37,6 +38,12 @@ namespace Zenith_API.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+
+            modelBuilder.Entity<TrackFile>().HasKey(x => new
+            {
+                x.TrackId,
+                x.FileId
+            });
 
             base.OnModelCreating(modelBuilder);
         }

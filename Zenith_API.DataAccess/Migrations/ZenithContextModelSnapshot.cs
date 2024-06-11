@@ -329,6 +329,21 @@ namespace Zenith_API.DataAccess.Migrations
                     b.ToTable("Tracks");
                 });
 
+            modelBuilder.Entity("Zenith_API.Domain.TrackFile", b =>
+                {
+                    b.Property<int>("TrackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TrackId", "FileId");
+
+                    b.HasIndex("FileId");
+
+                    b.ToTable("TrackFiles");
+                });
+
             modelBuilder.Entity("Zenith_API.Domain.File", b =>
                 {
                     b.HasOne("Zenith_API.Domain.FileType", "FileType")
@@ -384,6 +399,25 @@ namespace Zenith_API.DataAccess.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("MediaType");
+                });
+
+            modelBuilder.Entity("Zenith_API.Domain.TrackFile", b =>
+                {
+                    b.HasOne("Zenith_API.Domain.File", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Zenith_API.Domain.Track", "Track")
+                        .WithMany()
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+
+                    b.Navigation("Track");
                 });
 
             modelBuilder.Entity("Zenith_API.Domain.Album", b =>

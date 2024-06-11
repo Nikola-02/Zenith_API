@@ -42,6 +42,10 @@ namespace Zenith_API.DataAccess.Configurations
                 .WithMany(x => x.Tracks)
                 .HasForeignKey(x => x.MediaTypeId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(x => x.Files)
+                .WithMany(x => x.Tracks)
+                .UsingEntity<TrackFile>();
         }
     }
 }

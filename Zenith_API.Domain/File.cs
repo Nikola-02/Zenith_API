@@ -12,5 +12,7 @@ namespace Zenith_API.Domain
 
         public int FileTypeId { get; set; }
         public virtual FileType FileType { get; set; }
+
+        public virtual ICollection<Track> Tracks { get; set; } = new HashSet<Track>();
     }
 }

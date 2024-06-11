@@ -12,8 +12,8 @@ using Zenith_API.DataAccess;
 namespace Zenith_API.DataAccess.Migrations
 {
     [DbContext(typeof(ZenithContext))]
-    [Migration("20240610173647_Added_File_Table")]
-    partial class Added_File_Table
+    [Migration("20240610181704_Initial-Migration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -332,6 +332,21 @@ namespace Zenith_API.DataAccess.Migrations
                     b.ToTable("Tracks");
                 });
 
+            modelBuilder.Entity("Zenith_API.Domain.TrackFile", b =>
+                {
+                    b.Property<int>("TrackId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TrackId", "FileId");
+
+                    b.HasIndex("FileId");
+
+                    b.ToTable("TrackFiles");
+                });
+
             modelBuilder.Entity("Zenith_API.Domain.File", b =>
                 {
                     b.HasOne("Zenith_API.Domain.FileType", "FileType")
@@ -387,6 +402,25 @@ namespace Zenith_API.DataAccess.Migrations
                     b.Navigation("Genre");
 
                     b.Navigation("MediaType");
+                });
+
+            modelBuilder.Entity("Zenith_API.Domain.TrackFile", b =>
+                {
+                    b.HasOne("Zenith_API.Domain.File", "File")
+                        .WithMany()
+                        .HasForeignKey("FileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Zenith_API.Domain.Track", "Track")
+                        .WithMany()
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("File");
+
+                    b.Navigation("Track");
                 });
 
             modelBuilder.Entity("Zenith_API.Domain.Album", b =>
