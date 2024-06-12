@@ -11,7 +11,7 @@ using Zenith_API.DataAccess;
 using Zenith_API.Domain;
 using Zenith_API.Implementation.Validators;
 
-namespace Zenith_API.Implementation.UseCases.Commands
+namespace Zenith_API.Implementation.UseCases.Commands.Users
 {
     public class EfRegisterUserCommand : EfUseCase, IRegisterUserCommand
     {

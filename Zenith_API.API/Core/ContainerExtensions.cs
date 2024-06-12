@@ -4,7 +4,7 @@ using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
-using Zenith_API.Implementation.UseCases.Commands;
+using Zenith_API.Implementation.UseCases.Commands.Users;
 using Zenith_API.Implementation.UseCases.Queries;
 using Zenith_API.Implementation.Validators;
 
