@@ -74,26 +74,26 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
-    cfg.Events = new JwtBearerEvents
-    {
-        OnTokenValidated = context =>
-        {
-            //Token dohvatamo iz Authorization header-a
+    //cfg.Events = new JwtBearerEvents
+    //{
+    //    OnTokenValidated = context =>
+    //    {
+    //        //Token dohvatamo iz Authorization header-a
 
-            Guid tokenId = context.HttpContext.Request.GetTokenId().Value;
+    //        Guid tokenId = context.HttpContext.Request.GetTokenId().Value;
 
-            var storage = builder.Services.BuildServiceProvider().GetService<ITokenStorage>();
+    //        var storage = builder.Services.BuildServiceProvider().GetService<ITokenStorage>();
 
-            if (!storage.Exists(tokenId))
-            {
-                context.Fail("Invalid token");
-            }
+    //        if (!storage.Exists(tokenId))
+    //        {
+    //            context.Fail("Invalid token");
+    //        }
 
 
-            return Task.CompletedTask;
+    //        return Task.CompletedTask;
 
-        }
-    };
+    //    }
+    //};
 });
 
 
