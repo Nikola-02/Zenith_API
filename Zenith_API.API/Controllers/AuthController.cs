@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Zenith_API.API.Core;
 using Zenith_API.API.DTO;
 
@@ -26,8 +27,10 @@ namespace Zenith_API.API.Controllers
             return Ok(new AuthResponse { Token = token });
         }
 
-        // DELETE api/<AuthController>/5
-        [HttpDelete("{id}")]
+        // DELETE api/<AuthController>
+        //Logout
+        [Authorize]
+        [HttpDelete]
         public IActionResult Delete([FromServices] ITokenStorage storage)
         {
             storage.Remove(this.Request.GetTokenId().Value);

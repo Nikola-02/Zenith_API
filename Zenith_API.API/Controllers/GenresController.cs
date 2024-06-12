@@ -22,6 +22,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // GET: api/<GenresController>
+        [Authorize]
         [HttpGet]
         public IActionResult Get([FromServices] IGetGenresQuery query)
         {
