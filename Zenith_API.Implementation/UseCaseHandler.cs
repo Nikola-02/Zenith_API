@@ -16,5 +16,8 @@ namespace Zenith_API.Implementation
             _actor = actor;
             _logger = logger;
         }
+
+        //Pogledaj JwtApplicationActorProvider i onda ovde nastavi dalje da dodajes stvari
+        //Dodaj resolve za ove gore dependency injections
     }
 }
