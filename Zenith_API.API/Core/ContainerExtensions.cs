@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Zenith_API.Application;
 using Zenith_API.Implementation;
+using Zenith_API.Implementation.Logging.UseCases;
 
 namespace Zenith_API.API.Core
 {
@@ -9,7 +10,7 @@ namespace Zenith_API.API.Core
         public static void AddUseCases(this IServiceCollection services)
         {
             services.AddTransient<UseCaseHandler>();
-            //services.AddTransient<IUseCaseLogger, SPUseCaseLogger>();
+            services.AddTransient<IUseCaseLogger, SPUseCaseLogger>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

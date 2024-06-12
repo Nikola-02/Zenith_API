@@ -26,6 +26,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<ZenithContext>(x=> new ZenithContext(settings.ConnectionString));
 builder.Services.AddScoped<IDbConnection>(x=> new SqlConnection(settings.ConnectionString));
 
+builder.Services.AddUseCases();
+
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
