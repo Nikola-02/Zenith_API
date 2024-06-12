@@ -9,44 +9,44 @@ namespace Zenith_API.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private UseCaseHandler _handler;
 
-        public UserController(UseCaseHandler handler)
+        public UsersController(UseCaseHandler handler)
         {
             _handler = handler;
         }
 
-        // GET: api/<UserController>
+        // GET: api/<UsersController>
         [HttpGet]
         public IActionResult Get()
         {
             return Ok();
         }
 
-        // GET api/<UserController>/5
+        // GET api/<UsersController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<UserController>
+        // POST api/<UsersController>
         [HttpPost]
         public IActionResult Post([FromBody] RegisterUserDTO dto, [FromServices] IRegisterUserCommand command)
         {
             _handler.HandleCommand(command,dto);
-            return Created();
+            return StatusCode(201);
         }
 
-        // PUT api/<UserController>/5
+        // PUT api/<UsersController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<UserController>/5
+        // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

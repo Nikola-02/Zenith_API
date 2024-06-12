@@ -39,7 +39,7 @@ namespace Zenith_API.Implementation.Validators
                                             .NotEmpty()
                                             .WithMessage("Password is required.")
                                             .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
-                                            .WithMessage("Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+                                            .WithMessage("Password is not in right format. Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
            
             RuleFor(x => x.Username)
                 .NotEmpty()

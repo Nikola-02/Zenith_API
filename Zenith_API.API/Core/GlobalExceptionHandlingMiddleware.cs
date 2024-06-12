@@ -53,7 +53,10 @@ namespace Zenith_API.API.Core
 
                 if (exception is ConflictException c)
                 {
-                    httpContext.Response.StatusCode = 419;
+                    httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
+                    var body = new { error = c.Message };
+
+                    await httpContext.Response.WriteAsJsonAsync(body);
                     return;
                 }
 
