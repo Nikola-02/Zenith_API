@@ -3,6 +3,7 @@ using Zenith_API.Application;
 using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
+using Zenith_API.Implementation.UseCases.Queries;
 
 namespace Zenith_API.API.Core
 {
@@ -12,7 +13,7 @@ namespace Zenith_API.API.Core
         {
             services.AddTransient<UseCaseHandler>();
             services.AddTransient<IUseCaseLogger, SPUseCaseLogger>();
-            services.AddTransient<IGetGenresQuery, EfGetUsersQuery>();
+            services.AddTransient<IGetGenresQuery, EfGetGenresQuery>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

@@ -17,7 +17,7 @@ namespace Zenith_API.Application.UseCases.Queries
         public string Name { get; set; }
     }
 
-    public interface IGetGenresQuery : IQuery<GenreDTO, GenreSearch>
+    public interface IGetGenresQuery : IQuery<List<GenreDTO>, GenreSearch>
     {
     }
 }
