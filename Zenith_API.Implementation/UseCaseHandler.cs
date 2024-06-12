@@ -48,7 +48,6 @@ namespace Zenith_API.Implementation
             Console.WriteLine($"UseCase: {query.Name}, {stopwatch.ElapsedMilliseconds} ms");
 
             return result;
-
         }
 
         private void HandleCrossCuttingConcerns(IUseCase useCase, object data)
