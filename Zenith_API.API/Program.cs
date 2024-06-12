@@ -30,6 +30,8 @@ builder.Services.AddUseCases();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
+
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
 {
     var accessor = x.GetService<IHttpContextAccessor>();

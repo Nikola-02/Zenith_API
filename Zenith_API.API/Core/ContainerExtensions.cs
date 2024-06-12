@@ -1,9 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Zenith_API.Application;
+using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
+using Zenith_API.Implementation.UseCases.Commands;
 using Zenith_API.Implementation.UseCases.Queries;
+using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.API.Core
 {
@@ -14,6 +17,8 @@ namespace Zenith_API.API.Core
             services.AddTransient<UseCaseHandler>();
             services.AddTransient<IUseCaseLogger, SPUseCaseLogger>();
             services.AddTransient<IGetGenresQuery, EfGetGenresQuery>();
+            services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            services.AddTransient<RegisterUserDtoValidator>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)
