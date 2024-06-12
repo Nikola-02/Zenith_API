@@ -25,12 +25,14 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<ZenithContext>(x=> new ZenithContext(settings.ConnectionString));
 builder.Services.AddScoped<IDbConnection>(x=> new SqlConnection(settings.ConnectionString));
+builder.Services.AddTransient<JwtTokenCreator>();
 
 builder.Services.AddUseCases();
 
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
+builder.Services.AddTransient<ITokenStorage, InMemoryTokenStorage>();
 
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
 {
@@ -44,7 +46,6 @@ builder.Services.AddTransient<IApplicationActorProvider>(x =>
 
     return new JwtApplicationActorProvider(authHeader);
 });
-
 builder.Services.AddTransient<IApplicationActor>(x =>
 {
     var accessor = x.GetService<IHttpContextAccessor>();
@@ -76,26 +77,23 @@ builder.Services.AddAuthentication(options =>
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };
-    //cfg.Events = new JwtBearerEvents
-    //{
-    //    OnTokenValidated = context =>
-    //    {
-    //        //Token dohvatamo iz Authorization header-a
+    cfg.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = context =>
+        {
 
-    //        Guid tokenId = context.HttpContext.Request.GetTokenId().Value;
+            Guid tokenId = context.HttpContext.Request.GetTokenId().Value;
 
-    //        var storage = builder.Services.BuildServiceProvider().GetService<ITokenStorage>();
+            var storage = builder.Services.BuildServiceProvider().GetService<ITokenStorage>();
 
-    //        if (!storage.Exists(tokenId))
-    //        {
-    //            context.Fail("Invalid token");
-    //        }
+            if (!storage.Exists(tokenId))
+            {
+                context.Fail("Invalid token");
+            }
 
-
-    //        return Task.CompletedTask;
-
-    //    }
-    //};
+            return Task.CompletedTask;
+        }
+    };
 });
 
 
