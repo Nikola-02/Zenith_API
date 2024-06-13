@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO
 {
-    public class TrackInsertUpdateDTO
+    public class TrackInsertDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }

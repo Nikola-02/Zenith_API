@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO;
 
-namespace Zenith_API.Application.UseCases.Commands.Tracks
+namespace Zenith_API.Application.UseCases.Commands.FileTypes
 {
-    public interface ICreateTrackCommand : ICommand<TrackInsertDTO>
+    public interface ICreateFileTypeCommand : ICommand<LookupTablesInsertDTO>
     {
     }
 }

@@ -11,6 +11,8 @@ namespace Zenith_API.Implementation
 {
     public class UseCaseHandler
     {
+        private static int MaxUseCaseId => 4;
+
         private readonly IApplicationActor _actor;
         private readonly IUseCaseLogger _logger;
         public UseCaseHandler(IApplicationActor actor, IUseCaseLogger logger)
