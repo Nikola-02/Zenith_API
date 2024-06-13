@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Zenith_API.API.DTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -10,39 +12,40 @@ namespace Zenith_API.API.Controllers
     {
         private static IEnumerable<string> allowedExtensions = new List<string>
         {
-            ".jpg", ".jpeg", ".png"
+            ".jpg", ".jpeg", ".png", ".mp3", ".wav"
         };
 
-        // GET: api/<FilesController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET api/<FilesController>/fileName
+        [Authorize]
+        [HttpGet("{fileName}")]
+        public IActionResult Get(string fileName)
         {
-            return new string[] { "value1", "value2" };
-        }
+            var path = Path.Combine("wwwroot", "temp", fileName);
 
-        // GET api/<FilesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+            return Ok(new { exists = Path.Exists(path) });
         }
 
         // POST api/<FilesController>
+        [Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromForm] FileUploadDTO dto)
         {
-        }
+            var extension = Path.GetExtension(dto.File.FileName);
 
-        // PUT api/<FilesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            if (!allowedExtensions.Contains(extension))
+            {
+                return new UnsupportedMediaTypeResult();
+            }
 
-        // DELETE api/<FilesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var fileName = Guid.NewGuid().ToString() + extension;
+
+            var savePath = Path.Combine("wwwroot", "temp", fileName);
+
+            using var fs = new FileStream(savePath, FileMode.Create);
+
+            dto.File.CopyTo(fs);
+
+            return StatusCode(201, new { file = fileName });
         }
     }
 }
