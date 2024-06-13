@@ -16,6 +16,9 @@
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Validation\" />
+    <Folder Include="wwwroot\temp\" />
+    <Folder Include="wwwroot\tracks\images\" />
+    <Folder Include="wwwroot\tracks\songs\" />
   </ItemGroup>
 
   <ItemGroup>

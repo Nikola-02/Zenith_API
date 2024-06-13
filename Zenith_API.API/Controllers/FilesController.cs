@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Zenith_API.Application.DTO;
+﻿using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,37 +6,40 @@ namespace Zenith_API.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class FilesController : ControllerBase
     {
-        // GET: api/<AdminController>
+        private static IEnumerable<string> allowedExtensions = new List<string>
+        {
+            ".jpg", ".jpeg", ".png"
+        };
+
+        // GET: api/<FilesController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<AdminController>/5
+        // GET api/<FilesController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<AdminController>
-        [Authorize]
+        // POST api/<FilesController>
         [HttpPost]
-        public IActionResult Post([FromBody] AdminTrackDTO dto)
+        public void Post([FromBody] string value)
         {
-            return StatusCode(201);
         }
 
-        // PUT api/<AdminController>/5
+        // PUT api/<FilesController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<AdminController>/5
+        // DELETE api/<FilesController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
