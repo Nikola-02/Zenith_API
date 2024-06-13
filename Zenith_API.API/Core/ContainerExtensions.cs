@@ -19,6 +19,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetGenresQuery, EfGetGenresQuery>();
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<RegisterUserDtoValidator>();
+            services.AddTransient<CreateTrackDTOValidator>();
         }
 
         public static Guid? GetTokenId(this HttpRequest request)
