@@ -12,8 +12,8 @@ using Zenith_API.DataAccess;
 namespace Zenith_API.DataAccess.Migrations
 {
     [DbContext(typeof(ZenithContext))]
-    [Migration("20240611203738_Added_UserUseCase_Table")]
-    partial class Added_UserUseCase_Table
+    [Migration("20240613215940_Initial_Commit")]
+    partial class Initial_Commit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -94,6 +94,28 @@ namespace Zenith_API.DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Artists");
+                });
+
+            modelBuilder.Entity("Zenith_API.Domain.ErrorLog", b =>
+                {
+                    b.Property<Guid>("ErrorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StrackTrace")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Time")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ErrorId");
+
+                    b.ToTable("ErrorLogs");
                 });
 
             modelBuilder.Entity("Zenith_API.Domain.File", b =>
@@ -414,6 +436,39 @@ namespace Zenith_API.DataAccess.Migrations
                     b.HasIndex("FileId");
 
                     b.ToTable("TrackFiles");
+                });
+
+            modelBuilder.Entity("Zenith_API.Domain.UseCaseLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("ExecutedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UseCaseData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UseCaseName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username", "UseCaseName", "ExecutedAt");
+
+                    SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("Username", "UseCaseName", "ExecutedAt"), new[] { "UseCaseData" });
+
+                    b.ToTable("UseCaseLogs");
                 });
 
             modelBuilder.Entity("Zenith_API.Domain.User", b =>
