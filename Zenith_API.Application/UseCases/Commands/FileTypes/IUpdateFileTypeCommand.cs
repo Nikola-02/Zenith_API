@@ -7,7 +7,7 @@ using Zenith_API.Application.DTO;
 
 namespace Zenith_API.Application.UseCases.Commands.FileTypes
 {
-    public interface ICreateFileTypeCommand : ICommand<LookupTablesInsertUpdateDTO>
+    public interface IUpdateFileTypeCommand : ICommand<LookupTablesInsertUpdateDTO>
     {
     }
 }

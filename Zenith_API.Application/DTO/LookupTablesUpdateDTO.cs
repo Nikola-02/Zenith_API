@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zenith_API.Application.DTO
+{
+    public class LookupTablesUpdateDTO
+    {
+        public int Id { get; set; }
+
+        public string Name { get; set; }
+    }
+}

@@ -9,7 +9,7 @@ using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.Validators
 {
-    public class BaseLookupDTOValidator : AbstractValidator<LookupTablesInsertDTO>
+    public class BaseLookupDTOValidator : AbstractValidator<LookupTablesInsertUpdateDTO>
     {
         private ZenithContext _context;
 

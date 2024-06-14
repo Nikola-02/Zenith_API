@@ -31,6 +31,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<ICreateTrackCommand, EfCreateTrackCommand>();
             services.AddTransient<ICreateFileTypeCommand, EfCreateFileTypeCommand>();
+            services.AddTransient<IUpdateFileTypeCommand, EfUpdateFileTypeCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();

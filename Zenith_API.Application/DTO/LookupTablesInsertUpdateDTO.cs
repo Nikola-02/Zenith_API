@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO
 {
-    public class LookupTablesInsertDTO
+    public class LookupTablesInsertUpdateDTO
     {
+        public int? Id { get; set; }
+
         public string Name { get; set; }
     }
 }

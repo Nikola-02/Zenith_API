@@ -5,23 +5,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO;
+using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.DataAccess;
-using Zenith_API.Domain;
 using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.Implementation.UseCases.Commands.FileTypes
 {
-    public class EfCreateFileTypeCommand : ICreateFileTypeCommand
+    public class EfUpdateFileTypeCommand : IUpdateFileTypeCommand
     {
-        public int Id => 4;
+        public int Id => 5;
 
-        public string Name => "Insert File Type";
+        public string Name => "Update FileType";
 
         private readonly FileTypeDTOValidator _validator;
         private readonly ZenithContext _context;
 
-        public EfCreateFileTypeCommand(FileTypeDTOValidator validator, ZenithContext context)
+        public EfUpdateFileTypeCommand(FileTypeDTOValidator validator, ZenithContext context)
         {
             _validator = validator;
             _context = context;
@@ -31,12 +31,14 @@ namespace Zenith_API.Implementation.UseCases.Commands.FileTypes
         {
             _validator.ValidateAndThrow(data);
 
-            FileType fileType = new FileType()
-            {
-                Name = data.Name,
-            };
+            var fileType = _context.FileTypes.FirstOrDefault(x=>x.Id == data.Id);
 
-            _context.FileTypes.Add(fileType);
+            if (fileType==null)
+            {
+                throw new EntityNotFoundException(_context.FileTypes.GetType().ToString(), Id);
+            }
+
+            fileType.Name = data.Name;
 
             _context.SaveChanges();
         }
