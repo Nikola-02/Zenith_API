@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.FileTypes;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
+using Zenith_API.Application.UseCases.Queries;
+using Zenith_API.Application.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,9 +24,10 @@ namespace Zenith_API.API.Controllers
 
         // GET: api/<FileTypesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] FileTypeSearch search,
+                                [FromServices] IGetFileTypesQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // POST api/<FileTypesController>
