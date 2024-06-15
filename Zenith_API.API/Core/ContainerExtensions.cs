@@ -1,18 +1,22 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Zenith_API.Application;
+using Zenith_API.Application.UseCases.Commands.Artists;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Application.UseCases.Commands.Users;
-using Zenith_API.Application.UseCases.Queries;
+using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
+using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
 using Zenith_API.Implementation.Mapper;
+using Zenith_API.Implementation.UseCases.Commands.Artists;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
 using Zenith_API.Implementation.UseCases.Commands.Genres;
 using Zenith_API.Implementation.UseCases.Commands.Tracks;
 using Zenith_API.Implementation.UseCases.Commands.Users;
+using Zenith_API.Implementation.UseCases.Queries.Artists;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation.UseCases.Queries.Genres;
 using Zenith_API.Implementation.Validators;
@@ -32,6 +36,7 @@ namespace Zenith_API.API.Core
             //Queries
             services.AddTransient<IGetGenresQuery, EfGetGenresQuery>();
             services.AddTransient<IGetFileTypesQuery, EfGetFileTypesQuery>();
+            services.AddTransient<IGetArtistsQuery, EfGetArtistsQuery>();
 
             //Commands
                 //User
@@ -46,12 +51,15 @@ namespace Zenith_API.API.Core
             services.AddTransient<ICreateGenreCommand, EfCreateGenreCommand>();
             services.AddTransient<IUpdateGenreCommand, EfUpdateGenreCommand>();
             services.AddTransient<IDeleteGenreCommand, EfDeleteGenreCommand>();
+                //Artists
+            services.AddTransient<ICreateArtistCommand, EfCreateArtistCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
             services.AddTransient<GenreDTOValidator>();
+            services.AddTransient<ArtistDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

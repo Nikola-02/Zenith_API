@@ -5,25 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO;
-using Zenith_API.Application.DTO.FileTypes;
-using Zenith_API.Application.UseCases.Queries.FileTypes;
+using Zenith_API.Application.DTO.Artists;
+using Zenith_API.Application.DTO.Genres;
+using Zenith_API.Application.UseCases.Queries.Artists;
+using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.DataAccess;
 
-namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
+namespace Zenith_API.Implementation.UseCases.Queries.Artists
 {
-    public class EfGetFileTypesQuery : EfUseCaseMapper, IGetFileTypesQuery
+    public class EfGetArtistsQuery : EfUseCaseMapper, IGetArtistsQuery
     {
-        public int Id => 7;
-
-        public string Name => "Search FileTypes";
-
-        public EfGetFileTypesQuery(ZenithContext context, IMapper mapper) : base(context, mapper) 
+        public EfGetArtistsQuery(ZenithContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
-        public PagedResponse<FileTypeDTO> Execute(FileTypeSearch search)
+        public int Id => 11;
+
+        public string Name => "Search Artists";
+
+        public PagedResponse<ArtistDTO> Execute(ArtistSearch search)
         {
-            var query = Context.FileTypes.AsQueryable();
+            var query = Context.Artists.AsQueryable();
 
             query = query.Where(x => x.IsActive == true && x.DeletedAt == null);
 
@@ -36,12 +38,12 @@ namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
 
             query = query.Skip(skip).Take(perPage);
 
-            return new PagedResponse<FileTypeDTO>
+            return new PagedResponse<ArtistDTO>
             {
                 CurrentPage = page,
                 PerPage = perPage,
                 TotalCount = totalCount,
-                Data = Mapper.Map<List<FileTypeDTO>>(query.ToList())
+                Data = Mapper.Map<List<ArtistDTO>>(query.ToList())
             };
         }
     }

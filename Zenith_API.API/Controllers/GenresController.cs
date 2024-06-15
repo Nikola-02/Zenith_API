@@ -5,7 +5,7 @@ using Zenith_API.Application.DTO.FileTypes;
 using Zenith_API.Application.DTO.Genres;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.Application.UseCases.Commands.Genres;
-using Zenith_API.Application.UseCases.Queries;
+using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;

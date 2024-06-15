@@ -51,4 +51,16 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("Genre with same name already exists.");
         }
     }
+
+    public class ArtistDTOValidator : BaseLookupDTOValidator
+
+    {
+        public ArtistDTOValidator(ZenithContext context)
+            : base(context)
+        {
+            RuleFor(x => x.Name)
+                .Must(x => !Context.Artists.Any(t => t.Name == x && t.IsActive))
+                .WithMessage("Artist with same name already exists.");
+        }
+    }
 }

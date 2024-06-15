@@ -8,7 +8,7 @@ using Zenith_API.Application.DTO;
 using Zenith_API.Application.DTO.FileTypes;
 using Zenith_API.Application.DTO.Genres;
 using Zenith_API.Application.UseCases;
-using Zenith_API.Application.UseCases.Queries;
+using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.UseCases.Queries.Genres
@@ -28,7 +28,7 @@ namespace Zenith_API.Implementation.UseCases.Queries.Genres
         {
             var query = Context.Genres.AsQueryable();
 
-            query.Where(x => x.IsActive == true && x.DeletedAt == null);
+            query = query.Where(x => x.IsActive == true && x.DeletedAt == null);
 
             int totalCount = query.Count();
 
