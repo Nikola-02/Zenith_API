@@ -6,24 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO;
 using Zenith_API.Application.DTO.FileTypes;
-using Zenith_API.Application.UseCases.Queries.FileTypes;
+using Zenith_API.Application.DTO.Genres;
+using Zenith_API.Application.UseCases;
+using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.DataAccess;
 
-namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
+namespace Zenith_API.Implementation.UseCases.Queries.Genres
 {
-    public class EfGetFileTypesQuery : EfUseCase, IGetFileTypesQuery
+    public class EfGetGenresQuery : EfUseCase, IGetGenresQuery
     {
-        public int Id => 7;
 
-        public string Name => "Search FileTypes";
+        public int Id => 2;
 
-        public EfGetFileTypesQuery(ZenithContext context, IMapper mapper) : base(context, mapper) 
+        public string Name => "Search Genres";
+
+        public EfGetGenresQuery(ZenithContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
-        public PagedResponse<FileTypeDTO> Execute(FileTypeSearch search)
+        public PagedResponse<GenreDTO> Execute(GenresSearch search)
         {
-            var query = Context.FileTypes.AsQueryable();
+            var query = Context.Genres.AsQueryable();
 
             int totalCount = query.Count();
 
@@ -34,12 +37,12 @@ namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
 
             query = query.Skip(skip).Take(perPage);
 
-            return new PagedResponse<FileTypeDTO>
+            return new PagedResponse<GenreDTO>
             {
                 CurrentPage = page,
                 PerPage = perPage,
                 TotalCount = totalCount,
-                Data = Mapper.Map<List<FileTypeDTO>>(query.ToList())
+                Data = Mapper.Map<List<GenreDTO>>(query.ToList())
             };
         }
     }

@@ -33,7 +33,7 @@ namespace Zenith_API.API.Controllers
         // POST api/<FileTypesController>
         [Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] LookupTablesInsertUpdateDTO dto,
+        public IActionResult Post([FromBody] FileTypeInsertUpdateDTO dto,
                                    [FromServices] ICreateFileTypeCommand command)
         {
             _handler.HandleCommand(command,dto);
@@ -43,7 +43,7 @@ namespace Zenith_API.API.Controllers
         // PUT api/<FileTypesController>/5
         [Authorize]
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] LookupTablesInsertUpdateDTO dto,
+        public IActionResult Put(int id, [FromBody] FileTypeInsertUpdateDTO dto,
                                          [FromServices] IUpdateFileTypeCommand command)
         {
             dto.Id = id;
@@ -52,6 +52,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // DELETE api/<FileTypesController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteFileTypeCommand command)
         {

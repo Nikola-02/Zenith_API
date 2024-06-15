@@ -1,6 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Zenith_API.Application;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
+using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.Application.UseCases.Queries;
@@ -9,10 +10,11 @@ using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
 using Zenith_API.Implementation.Mapper;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
+using Zenith_API.Implementation.UseCases.Commands.Genres;
 using Zenith_API.Implementation.UseCases.Commands.Tracks;
 using Zenith_API.Implementation.UseCases.Commands.Users;
-using Zenith_API.Implementation.UseCases.Queries;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
+using Zenith_API.Implementation.UseCases.Queries.Genres;
 using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.API.Core
@@ -37,6 +39,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<ICreateFileTypeCommand, EfCreateFileTypeCommand>();
             services.AddTransient<IUpdateFileTypeCommand, EfUpdateFileTypeCommand>();
             services.AddTransient<IDeleteFileTypeCommand, EfDeleteFileTypeCommand>();
+            services.AddTransient<ICreateGenreCommand, EfCreateGenreCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();

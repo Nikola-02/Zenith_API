@@ -1,5 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.FileTypes;
+using Zenith_API.Application.DTO.Genres;
+using Zenith_API.Application.UseCases.Commands.FileTypes;
+using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
@@ -22,28 +27,21 @@ namespace Zenith_API.API.Controllers
         }
 
         // GET: api/<GenresController>
-        [Authorize]
         [HttpGet]
-        public IActionResult Get([FromServices] IGetGenresQuery query)
+        public IActionResult Get([FromQuery] GenresSearch search,
+                                [FromServices] IGetGenresQuery query)
         {
-            GenreSearch search = new GenreSearch();
-
-            search.Name = "neko";
-
             return Ok(_handler.HandleQuery(query,search));
         }
 
-        // GET api/<GenresController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<GenresController>
+        [Authorize]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post([FromBody] GenreInsertUpdateDTO dto,
+                                   [FromServices] ICreateGenreCommand command)
         {
+            _handler.HandleCommand(command, dto);
+            return StatusCode(201);
         }
 
         // PUT api/<GenresController>/5
