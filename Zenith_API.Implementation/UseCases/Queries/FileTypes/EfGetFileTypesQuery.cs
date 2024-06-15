@@ -25,6 +25,8 @@ namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
         {
             var query = Context.FileTypes.AsQueryable();
 
+            query.Where(x=>x.IsActive == true && x.DeletedAt == null);
+
             int totalCount = query.Count();
 
             int perPage = search.PerPage.HasValue ? (int)Math.Abs((double)search.PerPage) : 10;

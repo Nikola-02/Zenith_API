@@ -10,31 +10,29 @@ using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.Implementation.UseCases.Commands.FileTypes
 {
-    public class EfDeleteFileTypeCommand : IDeleteFileTypeCommand
+    public class EfDeleteFileTypeCommand : EfUseCase, IDeleteFileTypeCommand
     {
         public int Id => 6;
 
         public string Name => "Delete FileType";
 
-        private readonly ZenithContext _context;
-
-        public EfDeleteFileTypeCommand(ZenithContext context)
+        public EfDeleteFileTypeCommand(ZenithContext context) : base(context)
         {
-            _context = context;
         }
 
         public void Execute(int data)
         {
-            var fileType = _context.FileTypes.FirstOrDefault(x => x.Id == data);
+            var fileType = Context.FileTypes.FirstOrDefault(x => x.Id == data);
 
             if (fileType == null)
             {
-                throw new EntityNotFoundException(_context.FileTypes.GetType().ToString(), Id);
+                throw new EntityNotFoundException(Context.FileTypes.GetType().ToString(), Id);
             }
 
-            _context.FileTypes.Remove(fileType);
+            fileType.IsActive = false;
+            fileType.DeletedAt = DateTime.UtcNow;
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }

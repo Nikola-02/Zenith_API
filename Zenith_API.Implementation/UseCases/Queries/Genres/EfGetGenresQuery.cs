@@ -28,6 +28,8 @@ namespace Zenith_API.Implementation.UseCases.Queries.Genres
         {
             var query = Context.Genres.AsQueryable();
 
+            query.Where(x => x.IsActive == true && x.DeletedAt == null);
+
             int totalCount = query.Count();
 
             int perPage = search.PerPage.HasValue ? (int)Math.Abs((double)search.PerPage) : 10;

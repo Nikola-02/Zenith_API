@@ -34,13 +34,18 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetFileTypesQuery, EfGetFileTypesQuery>();
 
             //Commands
+                //User
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+                //Track
             services.AddTransient<ICreateTrackCommand, EfCreateTrackCommand>();
+                //FileType
             services.AddTransient<ICreateFileTypeCommand, EfCreateFileTypeCommand>();
             services.AddTransient<IUpdateFileTypeCommand, EfUpdateFileTypeCommand>();
             services.AddTransient<IDeleteFileTypeCommand, EfDeleteFileTypeCommand>();
+                //Genre
             services.AddTransient<ICreateGenreCommand, EfCreateGenreCommand>();
             services.AddTransient<IUpdateGenreCommand, EfUpdateGenreCommand>();
+            services.AddTransient<IDeleteGenreCommand, EfDeleteGenreCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();

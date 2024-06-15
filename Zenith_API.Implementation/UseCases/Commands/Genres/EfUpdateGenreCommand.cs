@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO.Genres;
+using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation.Validators;
@@ -26,7 +28,18 @@ namespace Zenith_API.Implementation.UseCases.Commands.Genres
 
         public void Execute(GenreInsertUpdateDTO data)
         {
-            throw new NotImplementedException();
+            _validator.ValidateAndThrow(data);
+
+            var genre = Context.Genres.FirstOrDefault(x => x.Id == data.Id);
+
+            if (genre == null)
+            {
+                throw new EntityNotFoundException(Context.Genres.GetType().ToString(), Id);
+            }
+
+            genre.Name = data.Name;
+
+            Context.SaveChanges();
         }
     }
 }

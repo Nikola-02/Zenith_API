@@ -8,6 +8,7 @@ using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,15 +46,23 @@ namespace Zenith_API.API.Controllers
         }
 
         // PUT api/<GenresController>/5
+        [Authorize]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] GenreInsertUpdateDTO dto,
+                                         [FromServices] IUpdateGenreCommand command)
         {
+            dto.Id = id;
+            _handler.HandleCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<GenresController>/5
+        [Authorize]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteGenreCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }
