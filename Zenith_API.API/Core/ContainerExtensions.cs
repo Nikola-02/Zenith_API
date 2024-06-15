@@ -54,6 +54,7 @@ namespace Zenith_API.API.Core
                 //Artists
             services.AddTransient<ICreateArtistCommand, EfCreateArtistCommand>();
             services.AddTransient<IUpdateArtistCommand, EfUpdateArtistCommand>();
+            services.AddTransient<IDeleteArtistCommand, EfDeleteArtistCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();

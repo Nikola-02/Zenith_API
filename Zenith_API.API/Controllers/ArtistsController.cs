@@ -60,8 +60,10 @@ namespace Zenith_API.API.Controllers
         // DELETE api/<ArtistsController>/5
         [Authorize]
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteArtistCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }
