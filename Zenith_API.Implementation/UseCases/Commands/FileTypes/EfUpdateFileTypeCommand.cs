@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.FileTypes;
 using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.DataAccess;
@@ -27,7 +28,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.FileTypes
             _context = context;
         }
 
-        public void Execute(LookupTablesInsertUpdateDTO data)
+        public void Execute(FileTypeInsertUpdateDTO data)
         {
             _validator.ValidateAndThrow(data);
 

@@ -39,4 +39,16 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("FileTypes with same name already exists.");
         }
     }
+
+    public class GenreDTOValidator : BaseLookupDTOValidator
+
+    {
+        public GenreDTOValidator(ZenithContext context)
+            : base(context)
+        {
+            RuleFor(x => x.Name)
+                .Must(x => !Context.Genres.Any(t => t.Name == x && t.IsActive))
+                .WithMessage("Genre with same name already exists.");
+        }
+    }
 }

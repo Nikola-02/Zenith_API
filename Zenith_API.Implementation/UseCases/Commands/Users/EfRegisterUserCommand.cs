@@ -1,4 +1,5 @@
-﻿using BCrypt.Net;
+﻿using AutoMapper;
+using BCrypt.Net;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
     {
         private RegisterUserDtoValidator _validator;
 
-        public EfRegisterUserCommand(ZenithContext context, RegisterUserDtoValidator validator) : base(context)
+        public EfRegisterUserCommand(ZenithContext context, RegisterUserDtoValidator validator, IMapper mapper) : base(context, mapper)
         {
             _validator = validator;
         }

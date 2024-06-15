@@ -40,11 +40,13 @@ namespace Zenith_API.API.Core
             services.AddTransient<IUpdateFileTypeCommand, EfUpdateFileTypeCommand>();
             services.AddTransient<IDeleteFileTypeCommand, EfDeleteFileTypeCommand>();
             services.AddTransient<ICreateGenreCommand, EfCreateGenreCommand>();
+            services.AddTransient<IUpdateGenreCommand, EfUpdateGenreCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
+            services.AddTransient<GenreDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
