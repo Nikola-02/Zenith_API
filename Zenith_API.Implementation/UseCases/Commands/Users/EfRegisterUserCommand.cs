@@ -18,7 +18,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
     {
         private RegisterUserDtoValidator _validator;
 
-        public EfRegisterUserCommand(ZenithContext context, RegisterUserDtoValidator validator, IMapper mapper) : base(context, mapper)
+        public EfRegisterUserCommand(ZenithContext context, RegisterUserDtoValidator validator) : base(context)
         {
             _validator = validator;
         }

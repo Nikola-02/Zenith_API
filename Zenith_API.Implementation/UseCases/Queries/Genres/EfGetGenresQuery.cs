@@ -13,7 +13,7 @@ using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.UseCases.Queries.Genres
 {
-    public class EfGetGenresQuery : EfUseCase, IGetGenresQuery
+    public class EfGetGenresQuery : EfUseCaseMapper, IGetGenresQuery
     {
 
         public int Id => 2;

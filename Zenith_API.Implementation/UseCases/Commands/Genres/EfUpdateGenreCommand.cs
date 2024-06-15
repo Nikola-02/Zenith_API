@@ -19,7 +19,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Genres
 
         private readonly GenreDTOValidator _validator;
 
-        public EfUpdateGenreCommand(GenreDTOValidator validator, ZenithContext context, IMapper mapper) : base(context, mapper)
+        public EfUpdateGenreCommand(GenreDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }

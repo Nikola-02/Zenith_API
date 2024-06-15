@@ -11,7 +11,7 @@ using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
 {
-    public class EfGetFileTypesQuery : EfUseCase, IGetFileTypesQuery
+    public class EfGetFileTypesQuery : EfUseCaseMapper, IGetFileTypesQuery
     {
         public int Id => 7;
 

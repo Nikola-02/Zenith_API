@@ -12,19 +12,17 @@ using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.Implementation.UseCases.Commands.Genres
 {
-    public class EfCreateGenreCommand : ICreateGenreCommand
+    public class EfCreateGenreCommand : EfUseCase,ICreateGenreCommand
     {
         public int Id => 8;
 
         public string Name => "Create Genre";
 
         private readonly GenreDTOValidator _validator;
-        private readonly ZenithContext _context;
 
-        public EfCreateGenreCommand(GenreDTOValidator validator, ZenithContext context)
+        public EfCreateGenreCommand(GenreDTOValidator validator, ZenithContext context) : base(context) 
         {
             _validator = validator;
-            _context = context;
         }
 
         public void Execute(GenreInsertUpdateDTO data)
@@ -36,9 +34,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Genres
                 Name = data.Name,
             };
 
-            _context.Genres.Add(genre);
+            Context.Genres.Add(genre);
 
-            _context.SaveChanges();
+            Context.SaveChanges();
         }
     }
 }
