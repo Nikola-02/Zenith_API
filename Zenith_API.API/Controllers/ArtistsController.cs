@@ -49,8 +49,12 @@ namespace Zenith_API.API.Controllers
         // PUT api/<ArtistsController>/5
         [Authorize]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] ArtistInsertUpdateDTO dto,
+                                         [FromServices] IUpdateArtistCommand command)
         {
+            dto.Id = id;
+            _handler.HandleCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<ArtistsController>/5
