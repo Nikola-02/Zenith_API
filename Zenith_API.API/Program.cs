@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
 using System.Data;
+using System.Reflection;
 using System.Text;
 using Zenith_API.API;
 using Zenith_API.API.Core;
 using Zenith_API.Application;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
+using Zenith_API.Implementation.Mapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,7 @@ builder.Configuration.Bind(settings); //mapira podatke iz appsettings.json u obj
 builder.Services.AddSingleton(settings.Jwt);
 
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -28,6 +31,7 @@ builder.Services.AddScoped<IDbConnection>(x=> new SqlConnection(settings.Connect
 builder.Services.AddTransient<JwtTokenCreator>();
 
 builder.Services.AddUseCases();
+builder.Services.AddAutoMapperProfiles();
 
 builder.Services.AddHttpContextAccessor();
 

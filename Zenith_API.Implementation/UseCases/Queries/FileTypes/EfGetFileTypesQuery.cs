@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,11 @@ namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
 
         public string Name => "Search FileTypes";
 
-        public EfGetFileTypesQuery(ZenithContext context) : base(context) 
+        private readonly IMapper _mapper;
+
+        public EfGetFileTypesQuery(ZenithContext context, IMapper mapper) : base(context) 
         {
-            
+            _mapper = mapper;
         }
 
         public PagedResponse<FileTypeDTO> Execute(FileTypeSearch search)
@@ -39,10 +42,7 @@ namespace Zenith_API.Implementation.UseCases.Queries.FileTypes
                 CurrentPage = page,
                 PerPage = perPage,
                 TotalCount = totalCount,
-                Data = query.Select(x=> new FileTypeDTO
-                {
-                    Name = x.Name
-                }).ToList()
+                Data = _mapper.Map<List<FileTypeDTO>>(query.ToList())
             };
         }
     }

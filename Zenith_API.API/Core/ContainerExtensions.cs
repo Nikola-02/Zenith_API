@@ -7,6 +7,7 @@ using Zenith_API.Application.UseCases.Queries;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
+using Zenith_API.Implementation.Mapper;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
 using Zenith_API.Implementation.UseCases.Commands.Tracks;
 using Zenith_API.Implementation.UseCases.Commands.Users;
@@ -41,6 +42,12 @@ namespace Zenith_API.API.Core
             services.AddTransient<RegisterUserDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
+        }
+
+        public static void AddAutoMapperProfiles(this IServiceCollection services)
+        {
+            //Profiles
+            services.AddAutoMapper(typeof(FileTypeProfile));
         }
 
         public static Guid? GetTokenId(this HttpRequest request)
