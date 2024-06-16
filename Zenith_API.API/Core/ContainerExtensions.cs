@@ -69,6 +69,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<FileTypeDTOValidator>();
             services.AddTransient<GenreDTOValidator>();
             services.AddTransient<ArtistDTOValidator>();
+            services.AddTransient<AlbumDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
