@@ -75,4 +75,16 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("Album with same name already exists.");
         }
     }
+
+    public class MediaTypeDTOValidator : BaseLookupDTOValidator
+
+    {
+        public MediaTypeDTOValidator(ZenithContext context)
+            : base(context)
+        {
+            RuleFor(x => x.Name)
+                .Must(x => !Context.MediaTypes.Any(t => t.Name == x && t.IsActive))
+                .WithMessage("MediaType with same name already exists.");
+        }
+    }
 }

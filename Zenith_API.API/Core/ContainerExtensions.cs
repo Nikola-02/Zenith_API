@@ -4,12 +4,14 @@ using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Artists;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.Application.UseCases.Commands.Genres;
+using Zenith_API.Application.UseCases.Commands.MediaTypes;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.Application.UseCases.Queries.Albums;
 using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
 using Zenith_API.Application.UseCases.Queries.Genres;
+using Zenith_API.Application.UseCases.Queries.MediaTypes;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
 using Zenith_API.Implementation.Mapper;
@@ -17,12 +19,14 @@ using Zenith_API.Implementation.UseCases.Commands.Albums;
 using Zenith_API.Implementation.UseCases.Commands.Artists;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
 using Zenith_API.Implementation.UseCases.Commands.Genres;
+using Zenith_API.Implementation.UseCases.Commands.MediaTypes;
 using Zenith_API.Implementation.UseCases.Commands.Tracks;
 using Zenith_API.Implementation.UseCases.Commands.Users;
 using Zenith_API.Implementation.UseCases.Queries.Albums;
 using Zenith_API.Implementation.UseCases.Queries.Artists;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation.UseCases.Queries.Genres;
+using Zenith_API.Implementation.UseCases.Queries.MediaTypes;
 using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.API.Core
@@ -42,6 +46,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetFileTypesQuery, EfGetFileTypesQuery>();
             services.AddTransient<IGetArtistsQuery, EfGetArtistsQuery>();
             services.AddTransient<IGetAlbumsQuery, EfGetAlbumsQuery>();
+            services.AddTransient<IGetMediaTypesQuery, EfGetMediaTypesQuery>();
 
             //Commands
                 //User
@@ -64,6 +69,8 @@ namespace Zenith_API.API.Core
             services.AddTransient<ICreateAlbumCommand, EfCreateAlbumCommand>();
             services.AddTransient<IUpdateAlbumCommand, EfUpdateAlbumCommand>();
             services.AddTransient<IDeleteAlbumCommand, EfDeleteAlbumCommand>();
+                //MediaTypes
+            services.AddTransient<ICreateMediaTypeCommand, EfCreateMediaTypeCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
@@ -72,6 +79,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<GenreDTOValidator>();
             services.AddTransient<ArtistDTOValidator>();
             services.AddTransient<AlbumDTOValidator>();
+            services.AddTransient<MediaTypeDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
@@ -81,6 +89,7 @@ namespace Zenith_API.API.Core
             services.AddAutoMapper(typeof(ArtistProfile));
             services.AddAutoMapper(typeof(AlbumProfile));
             services.AddAutoMapper(typeof(GenreProfile));
+            services.AddAutoMapper(typeof(MediaTypeProfile));
         }
 
         public static Guid? GetTokenId(this HttpRequest request)
