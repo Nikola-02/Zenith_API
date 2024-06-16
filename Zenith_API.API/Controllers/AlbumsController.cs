@@ -8,6 +8,7 @@ using Zenith_API.Application.UseCases.Queries.Albums;
 using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -57,8 +58,10 @@ namespace Zenith_API.API.Controllers
 
         // DELETE api/<AlbumsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteAlbumCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }

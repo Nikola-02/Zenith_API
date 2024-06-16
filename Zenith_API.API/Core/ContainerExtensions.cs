@@ -63,6 +63,7 @@ namespace Zenith_API.API.Core
                 //Albums
             services.AddTransient<ICreateAlbumCommand, EfCreateAlbumCommand>();
             services.AddTransient<IUpdateAlbumCommand, EfUpdateAlbumCommand>();
+            services.AddTransient<IDeleteAlbumCommand, EfDeleteAlbumCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
