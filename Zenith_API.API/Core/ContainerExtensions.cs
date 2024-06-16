@@ -72,6 +72,7 @@ namespace Zenith_API.API.Core
                 //MediaTypes
             services.AddTransient<ICreateMediaTypeCommand, EfCreateMediaTypeCommand>();
             services.AddTransient<IUpdateMediaTypeCommand, EfUpdateMediaTypeCommand>();
+            services.AddTransient<IDeleteMediaTypeCommand, EfDeleteMediaTypeCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
