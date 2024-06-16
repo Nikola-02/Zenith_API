@@ -63,4 +63,16 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("Artist with same name already exists.");
         }
     }
+
+    public class AlbumDTOValidator : BaseLookupDTOValidator
+
+    {
+        public AlbumDTOValidator(ZenithContext context)
+            : base(context)
+        {
+            RuleFor(x => x.Name)
+                .Must(x => !Context.Albums.Any(t => t.Name == x && t.IsActive))
+                .WithMessage("Album with same name already exists.");
+        }
+    }
 }
