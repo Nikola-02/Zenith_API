@@ -87,4 +87,14 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("MediaType with same name already exists.");
         }
     }
+
+    public class MediaTypeUpdateDTOValidator : BaseLookupDTOValidator
+
+    {
+        public MediaTypeUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+  
+        }
+    }
 }

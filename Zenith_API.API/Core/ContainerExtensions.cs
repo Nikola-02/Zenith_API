@@ -71,6 +71,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IDeleteAlbumCommand, EfDeleteAlbumCommand>();
                 //MediaTypes
             services.AddTransient<ICreateMediaTypeCommand, EfCreateMediaTypeCommand>();
+            services.AddTransient<IUpdateMediaTypeCommand, EfUpdateMediaTypeCommand>();
 
             //Validators
             services.AddTransient<RegisterUserDtoValidator>();
@@ -80,6 +81,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<ArtistDTOValidator>();
             services.AddTransient<AlbumDTOValidator>();
             services.AddTransient<MediaTypeDTOValidator>();
+            services.AddTransient<MediaTypeUpdateDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
