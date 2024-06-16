@@ -40,6 +40,16 @@ namespace Zenith_API.Implementation.Validators
         }
     }
 
+    public class FileTypeUpdateDTOValidator : BaseLookupDTOValidator
+
+    {
+        public FileTypeUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+
+        }
+    }
+
     public class GenreDTOValidator : BaseLookupDTOValidator
 
     {
@@ -49,6 +59,16 @@ namespace Zenith_API.Implementation.Validators
             RuleFor(x => x.Name)
                 .Must(x => !Context.Genres.Any(t => t.Name == x && t.IsActive))
                 .WithMessage("Genre with same name already exists.");
+        }
+    }
+
+    public class GenreUpdateDTOValidator : BaseLookupDTOValidator
+
+    {
+        public GenreUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+
         }
     }
 
@@ -64,6 +84,16 @@ namespace Zenith_API.Implementation.Validators
         }
     }
 
+    public class ArtistUpdateDTOValidator : BaseLookupDTOValidator
+
+    {
+        public ArtistUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+
+        }
+    }
+
     public class AlbumDTOValidator : BaseLookupDTOValidator
 
     {
@@ -73,6 +103,16 @@ namespace Zenith_API.Implementation.Validators
             RuleFor(x => x.Name)
                 .Must(x => !Context.Albums.Any(t => t.Name == x && t.IsActive))
                 .WithMessage("Album with same name already exists.");
+        }
+    }
+
+    public class AlbumUpdateDTOValidator : BaseLookupDTOValidator
+
+    {
+        public AlbumUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+
         }
     }
 

@@ -19,9 +19,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.FileTypes
 
         public string Name => "Update FileType";
 
-        private readonly FileTypeDTOValidator _validator;
+        private readonly FileTypeUpdateDTOValidator _validator;
 
-        public EfUpdateFileTypeCommand(FileTypeDTOValidator validator, ZenithContext context) : base(context)
+        public EfUpdateFileTypeCommand(FileTypeUpdateDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }

@@ -19,9 +19,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Genres
 
         public string Name => "Update Genre";
 
-        private readonly GenreDTOValidator _validator;
+        private readonly GenreUpdateDTOValidator _validator;
 
-        public EfUpdateGenreCommand(GenreDTOValidator validator, ZenithContext context) : base(context)
+        public EfUpdateGenreCommand(GenreUpdateDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }

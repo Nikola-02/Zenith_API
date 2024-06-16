@@ -18,9 +18,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Albums
 
         public string Name => "Update Album";
 
-        public AlbumDTOValidator _validator { get; set; }
+        public AlbumUpdateDTOValidator _validator { get; set; }
 
-        public EfUpdateAlbumCommand(AlbumDTOValidator validator, ZenithContext context) : base(context)
+        public EfUpdateAlbumCommand(AlbumUpdateDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }

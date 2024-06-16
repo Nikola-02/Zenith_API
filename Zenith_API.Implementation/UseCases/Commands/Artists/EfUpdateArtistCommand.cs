@@ -14,9 +14,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Artists
 {
     public class EfUpdateArtistCommand : EfUseCase, IUpdateArtistCommand
     {
-        private readonly ArtistDTOValidator _validator;
+        private readonly ArtistUpdateDTOValidator _validator;
 
-        public EfUpdateArtistCommand(ArtistDTOValidator validator, ZenithContext context) : base(context)
+        public EfUpdateArtistCommand(ArtistUpdateDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }
