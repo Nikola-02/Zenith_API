@@ -78,9 +78,13 @@ namespace Zenith_API.API.Core
             services.AddTransient<RegisterUserDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
+            services.AddTransient<FileTypeUpdateDTOValidator>();
             services.AddTransient<GenreDTOValidator>();
+            services.AddTransient<GenreUpdateDTOValidator>();
             services.AddTransient<ArtistDTOValidator>();
+            services.AddTransient<ArtistUpdateDTOValidator>();
             services.AddTransient<AlbumDTOValidator>();
+            services.AddTransient<AlbumUpdateDTOValidator>();
             services.AddTransient<MediaTypeDTOValidator>();
             services.AddTransient<MediaTypeUpdateDTOValidator>();
         }
