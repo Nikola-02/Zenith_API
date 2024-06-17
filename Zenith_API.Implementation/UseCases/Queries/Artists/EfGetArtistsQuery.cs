@@ -29,6 +29,11 @@ namespace Zenith_API.Implementation.UseCases.Queries.Artists
 
             query = query.Where(x => x.IsActive == true && x.DeletedAt == null);
 
+            if (!string.IsNullOrEmpty(search.Keyword))
+            {
+                query = query.Where(x => x.Name.Contains(search.Keyword));
+            }
+
             int totalCount = query.Count();
 
             int perPage = search.PerPage.HasValue ? (int)Math.Abs((double)search.PerPage) : 10;
