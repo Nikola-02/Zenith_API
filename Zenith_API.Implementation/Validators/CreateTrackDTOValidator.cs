@@ -116,6 +116,7 @@ namespace Zenith_API.Implementation.Validators
                 var path = Path.Combine("wwwroot", "temp", fileName);
                 return File.Exists(path);
             })
+            .When(x => x.TrackFiles != null && !string.IsNullOrEmpty(x.TrackFiles.ImagePath))
             .WithMessage("Image doesn't exist.");
 
             RuleFor(x => x.TrackFiles.SongPath)
@@ -129,6 +130,7 @@ namespace Zenith_API.Implementation.Validators
                 var path = Path.Combine("wwwroot", "temp", fileName);
                 return File.Exists(path);
             })
+            .When(x => x.TrackFiles != null && !string.IsNullOrEmpty(x.TrackFiles.SongPath))
             .WithMessage("Song doesn't exist.");
         }
     }

@@ -38,17 +38,40 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
                 throw new EntityNotFoundException(Context.Tracks.GetType().ToString(), Id);
             }
 
-            if (string.IsNullOrEmpty(data.TrackFiles.ImagePath))
+            FileType imageFileType = Context.FileTypes.FirstOrDefault(x => x.Name == "image" && x.IsActive && x.DeletedAt == null);
+            FileType songFileType = Context.FileTypes.FirstOrDefault(x => x.Name == "audio" && x.IsActive && x.DeletedAt == null);
+
+            if(data.TrackFiles != null)
             {
-                FileHelper.MoveFile("temp", "tracks/images", data.TrackFiles.ImagePath);
+                if (!string.IsNullOrEmpty(data.TrackFiles.ImagePath))
+                {
+                    FileHelper.MoveFile("temp", "tracks\\images", data.TrackFiles.ImagePath);
+
+                    Domain.File fileImage = new Domain.File
+                    {
+                        FileName = data.TrackFiles.ImagePath,
+                        FileType = imageFileType
+                    };
+
+                    track.Files.Add(fileImage);
+
+                }
+
+                if (!string.IsNullOrEmpty(data.TrackFiles.SongPath))
+                {
+                    FileHelper.MoveFile("temp", "tracks\\songs", data.TrackFiles.SongPath);
+
+                    Domain.File fileSong = new Domain.File
+                    {
+                        FileName = data.TrackFiles.SongPath,
+                        FileType = songFileType
+                    };
+
+                    track.Files.Add(fileSong);
+                }
 
             }
 
-            if (string.IsNullOrEmpty(data.TrackFiles.SongPath))
-            {
-                FileHelper.MoveFile("temp", "tracks/songs", data.TrackFiles.SongPath);
-
-            }
 
             track.Name = data.Name;
             track.Description = data.Description;
@@ -57,6 +80,18 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
             track.ArtistId = data.ArtistId;
             track.GenreId = data.GenreId;
             track.MediaTypeId = data.MediaTypeId;
+
+            var trackActivePrice = track.Prices.FirstOrDefault(x => x.IsActive && x.DeletedAt == null);
+
+            if (trackActivePrice.Amount != data.Price)
+            {
+                trackActivePrice.IsActive = false;
+
+                track.Prices.Add(new Price
+                {
+                    Amount = data.Price,
+                });
+            }
 
             Context.SaveChanges();
         }
