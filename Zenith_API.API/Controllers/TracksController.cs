@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Implementation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -34,8 +36,9 @@ namespace Zenith_API.API.Controllers
         }
 
         // POST api/<TracksController>
+        [Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] TrackInsertDTO dto,
+        public IActionResult Post([FromBody] TrackInsertUpdateDTO dto,
                                   [FromServices] ICreateTrackCommand command)
         {
             _handler.HandleCommand(command, dto);
@@ -43,9 +46,14 @@ namespace Zenith_API.API.Controllers
         }
 
         // PUT api/<TracksController>/5
+        [Authorize]
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] TrackInsertUpdateDTO dto,
+                                  [FromServices] IUpdateTrackCommand command)
         {
+            dto.Id = id;
+            _handler.HandleCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<TracksController>/5

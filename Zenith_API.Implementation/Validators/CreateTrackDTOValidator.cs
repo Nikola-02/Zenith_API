@@ -9,7 +9,7 @@ using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.Validators
 {
-    public class CreateTrackDTOValidator : AbstractValidator<TrackInsertDTO>
+    public class CreateTrackDTOValidator : AbstractValidator<TrackInsertUpdateDTO>
     {
         public CreateTrackDTOValidator(ZenithContext context)
         {

@@ -28,7 +28,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
             _context = context;
         }
 
-        public void Execute(TrackInsertDTO data)
+        public void Execute(TrackInsertUpdateDTO data)
         {
             _validator.ValidateAndThrow(data);
 

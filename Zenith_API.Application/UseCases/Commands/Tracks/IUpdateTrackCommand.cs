@@ -7,7 +7,7 @@ using Zenith_API.Application.DTO.Tracks;
 
 namespace Zenith_API.Application.UseCases.Commands.Tracks
 {
-    public interface ICreateTrackCommand : ICommand<TrackInsertUpdateDTO>
+    public interface IUpdateTrackCommand : ICommand<TrackInsertUpdateDTO>
     {
     }
 }
