@@ -77,6 +77,7 @@ namespace Zenith_API.API.Core
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();
+            services.AddTransient<UserUpdateDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
             services.AddTransient<FileTypeUpdateDTOValidator>();
