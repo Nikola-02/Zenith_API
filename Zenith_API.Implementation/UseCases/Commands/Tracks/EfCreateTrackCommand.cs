@@ -13,29 +13,42 @@ using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.Implementation.UseCases.Commands.Tracks
 {
-    public class EfCreateTrackCommand : ICreateTrackCommand
+    public class EfCreateTrackCommand : EfUseCase, ICreateTrackCommand
     {
         public int Id => 3;
 
         public string Name => "Insert Track";
 
         private readonly CreateTrackDTOValidator _validator;
-        private readonly ZenithContext _context;
 
         public EfCreateTrackCommand(ZenithContext context, CreateTrackDTOValidator validator)
+            :base(context)
         {
             _validator = validator;
-            _context = context;
         }
 
         public void Execute(TrackInsertUpdateDTO data)
         {
             _validator.ValidateAndThrow(data);
 
-            FileHelper.MoveFile("temp", "tracks/images", data.TrackFiles.ImagePath);
-            FileHelper.MoveFile("temp", "tracks/songs", data.TrackFiles.ImagePath);
+            FileHelper.MoveFile("temp", "tracks\\images", data.TrackFiles.ImagePath);
+            FileHelper.MoveFile("temp", "tracks\\songs", data.TrackFiles.SongPath);
 
-            //dodaj price i fajlove
+            FileType imageFileType = Context.FileTypes.FirstOrDefault(x=>x.Name == "image" && x.IsActive && x.DeletedAt == null);
+            FileType songFileType = Context.FileTypes.FirstOrDefault(x=>x.Name == "audio" && x.IsActive && x.DeletedAt == null);
+
+            Domain.File fileImage = new Domain.File
+            {
+                FileName = data.TrackFiles.ImagePath,
+                FileType = imageFileType
+            };
+
+            Domain.File fileSong = new Domain.File
+            {
+                FileName = data.TrackFiles.SongPath,
+                FileType = songFileType
+            };
+
             Track track = new Track
             {
                 Name = data.Name,
@@ -44,13 +57,20 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
                 AlbumId = data.AlbumId,
                 ArtistId = data.ArtistId,
                 GenreId = data.GenreId,
-                MediaTypeId = data.MediaTypeId,
-
+                MediaTypeId = data.MediaTypeId
             };
 
-            _context.Tracks.Add(track);
+            track.Prices.Add(new Price
+            {
+                Amount = data.Price
+            });
 
-            _context.SaveChanges();
+            track.Files.Add(fileImage);
+            track.Files.Add(fileSong);
+
+            Context.Tracks.Add(track);
+
+            Context.SaveChanges();
         }
     }
 }

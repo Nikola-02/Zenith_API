@@ -9,17 +9,16 @@ using Zenith_API.DataAccess;
 
 namespace Zenith_API.Implementation.Validators
 {
-    public class CreateTrackDTOValidator : AbstractValidator<TrackInsertUpdateDTO>
+    public class BaseTrackDTOValidator : AbstractValidator<TrackInsertUpdateDTO>
     {
-        public CreateTrackDTOValidator(ZenithContext context)
+        public BaseTrackDTOValidator(ZenithContext context)
         {
             CascadeMode = CascadeMode.StopOnFirstFailure;
 
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithMessage("Name is required.")
-                .Must(x => !context.Tracks.Any(t=>t.Name == x && t.IsActive && t.DeletedAt == null))
-                .WithMessage("Track with same name already exists.");
+                .WithMessage("Name is required.");
+                
 
             RuleFor(x => x.Price)
                 .NotEmpty()
@@ -55,6 +54,16 @@ namespace Zenith_API.Implementation.Validators
                 .WithMessage("MediaType is required.")
                 .Must(x => context.MediaTypes.Any(m => m.Id == x && m.IsActive && m.DeletedAt == null))
                 .WithMessage("Provided mediaType doesn't exist.");
+        }
+    }
+
+    public class CreateTrackDTOValidator : BaseTrackDTOValidator
+    {
+        public CreateTrackDTOValidator(ZenithContext context) : base(context)
+        {
+            RuleFor(x=>x.Name)
+                .Must(x => !context.Tracks.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
+                .WithMessage("Track with same name already exists.");
 
             RuleFor(x => x.TrackFiles.ImagePath)
                 .NotEmpty()
@@ -89,6 +98,38 @@ namespace Zenith_API.Implementation.Validators
                             })
                             .WithMessage("Song doesn't exist.");
                 });
+        }
+    }
+
+    public class UpdateTrackDTOValidator : BaseTrackDTOValidator
+    {
+        public UpdateTrackDTOValidator(ZenithContext context) : base(context)
+        {
+            RuleFor(x => x.TrackFiles.ImagePath)
+            .Must((x, fileName) =>
+            {
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    return true;
+                }
+
+                var path = Path.Combine("wwwroot", "temp", fileName);
+                return File.Exists(path);
+            })
+            .WithMessage("Image doesn't exist.");
+
+            RuleFor(x => x.TrackFiles.SongPath)
+            .Must((x, fileName) =>
+            {
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    return true;
+                }
+
+                var path = Path.Combine("wwwroot", "temp", fileName);
+                return File.Exists(path);
+            })
+            .WithMessage("Song doesn't exist.");
         }
     }
 }
