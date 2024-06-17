@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.Genres
 {
-    public class GenresSearch : LookupSearch
+    public class GenresSearch : TablesSearch
     {
     }
 }

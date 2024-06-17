@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.FileTypes
 {
-    public class FileTypeSearch : LookupSearch
+    public class FileTypeSearch : TablesSearch
     {
     }
 }

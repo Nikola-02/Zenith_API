@@ -18,7 +18,7 @@ namespace Zenith_API.Implementation.Validators
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .WithMessage("Name is required.")
-                .Must(x => !context.Tracks.Any(t=>t.Name == x && t.IsActive))
+                .Must(x => !context.Tracks.Any(t=>t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("Track with same name already exists.");
 
             RuleFor(x => x.Price)
@@ -35,25 +35,25 @@ namespace Zenith_API.Implementation.Validators
 
             RuleFor(x => x.ArtistId)
                 .NotEmpty().WithMessage("Artist is required.")
-                .Must(x => context.Artists.Any(a => a.Id == x && a.IsActive))
+                .Must(x => context.Artists.Any(a => a.Id == x && a.IsActive && a.DeletedAt == null))
                 .WithMessage("Provided artist doesn't exist.");
 
             RuleFor(x => x.AlbumId)
                 .NotEmpty()
                 .WithMessage("Album is required.")
-                .Must(x => context.Albums.Any(a => a.Id == x && a.IsActive))
+                .Must(x => context.Albums.Any(a => a.Id == x && a.IsActive && a.DeletedAt == null))
                 .WithMessage("Provided album doesn't exist.");
 
             RuleFor(x => x.GenreId)
                 .NotEmpty()
                 .WithMessage("Genre is required.")
-                .Must(x => context.Genres.Any(g => g.Id == x && g.IsActive))
+                .Must(x => context.Genres.Any(g => g.Id == x && g.IsActive && g.DeletedAt == null))
                 .WithMessage("Provided genre doesn't exist.");
 
             RuleFor(x => x.MediaTypeId)
                 .NotEmpty()
                 .WithMessage("MediaType is required.")
-                .Must(x => context.MediaTypes.Any(m => m.Id == x && m.IsActive))
+                .Must(x => context.MediaTypes.Any(m => m.Id == x && m.IsActive && m.DeletedAt == null))
                 .WithMessage("Provided mediaType doesn't exist.");
 
             RuleFor(x => x.TrackFiles.ImagePath)

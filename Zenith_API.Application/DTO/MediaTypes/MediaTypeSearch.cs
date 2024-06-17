@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.MediaTypes
 {
-    public class MediaTypeSearch : LookupSearch
+    public class MediaTypeSearch : TablesSearch
     {
     }
 }

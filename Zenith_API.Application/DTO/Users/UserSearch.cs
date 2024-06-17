@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zenith_API.Application.DTO.Albums
+namespace Zenith_API.Application.DTO.Users
 {
-    public class AlbumSearch : TablesSearch
+    public class UserSearch : TablesSearch
     {
     }
 }

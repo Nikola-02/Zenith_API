@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Zenith_API.Application.DTO.Albums
+namespace Zenith_API.Application.UseCases.Commands.Users
 {
-    public class AlbumSearch : TablesSearch
+    public interface IDeleteUserCommand : ICommand<int>
     {
     }
 }

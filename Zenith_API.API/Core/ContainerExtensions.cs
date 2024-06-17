@@ -12,6 +12,7 @@ using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
 using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.Application.UseCases.Queries.MediaTypes;
+using Zenith_API.Application.UseCases.Queries.Users;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
 using Zenith_API.Implementation.Mapper;
@@ -27,6 +28,7 @@ using Zenith_API.Implementation.UseCases.Queries.Artists;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation.UseCases.Queries.Genres;
 using Zenith_API.Implementation.UseCases.Queries.MediaTypes;
+using Zenith_API.Implementation.UseCases.Queries.Users;
 using Zenith_API.Implementation.Validators;
 
 namespace Zenith_API.API.Core
@@ -47,11 +49,13 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetArtistsQuery, EfGetArtistsQuery>();
             services.AddTransient<IGetAlbumsQuery, EfGetAlbumsQuery>();
             services.AddTransient<IGetMediaTypesQuery, EfGetMediaTypesQuery>();
+            services.AddTransient<IGetUsersQuery, EfGetUsersQuery>();
 
             //Commands
                 //User
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
             services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
+            services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
                 //Track
             services.AddTransient<ICreateTrackCommand, EfCreateTrackCommand>();
                 //FileType
@@ -99,6 +103,7 @@ namespace Zenith_API.API.Core
             services.AddAutoMapper(typeof(AlbumProfile));
             services.AddAutoMapper(typeof(GenreProfile));
             services.AddAutoMapper(typeof(MediaTypeProfile));
+            services.AddAutoMapper(typeof(UserProfile));
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

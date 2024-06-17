@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO
 {
-    public class LookupSearch : PagedSearch
+    public class TablesSearch : PagedSearch
     {
         public string Keyword { get; set; }
     }

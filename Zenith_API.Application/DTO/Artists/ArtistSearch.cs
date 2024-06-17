@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.Artists
 {
-    public class ArtistSearch : LookupSearch
+    public class ArtistSearch : TablesSearch
     {
     }
 }

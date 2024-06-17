@@ -35,7 +35,7 @@ namespace Zenith_API.Implementation.Validators
             :base(context)
         {
             RuleFor(x => x.Name)
-                .Must(x => !Context.FileTypes.Any(t => t.Name == x && t.IsActive))
+                .Must(x => !Context.FileTypes.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("FileTypes with same name already exists.");
         }
     }
@@ -57,7 +57,7 @@ namespace Zenith_API.Implementation.Validators
             : base(context)
         {
             RuleFor(x => x.Name)
-                .Must(x => !Context.Genres.Any(t => t.Name == x && t.IsActive))
+                .Must(x => !Context.Genres.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("Genre with same name already exists.");
         }
     }
@@ -79,7 +79,7 @@ namespace Zenith_API.Implementation.Validators
             : base(context)
         {
             RuleFor(x => x.Name)
-                .Must(x => !Context.Artists.Any(t => t.Name == x && t.IsActive))
+                .Must(x => !Context.Artists.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("Artist with same name already exists.");
         }
     }
@@ -101,7 +101,7 @@ namespace Zenith_API.Implementation.Validators
             : base(context)
         {
             RuleFor(x => x.Name)
-                .Must(x => !Context.Albums.Any(t => t.Name == x && t.IsActive))
+                .Must(x => !Context.Albums.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("Album with same name already exists.");
         }
     }
@@ -123,7 +123,7 @@ namespace Zenith_API.Implementation.Validators
             : base(context)
         {
             RuleFor(x => x.Name)
-                .Must(x => !Context.MediaTypes.Any(t => t.Name == x && t.IsActive))
+                .Must(x => !Context.MediaTypes.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("MediaType with same name already exists.");
         }
     }

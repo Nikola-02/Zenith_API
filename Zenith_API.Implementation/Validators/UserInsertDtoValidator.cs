@@ -57,12 +57,13 @@ namespace Zenith_API.Implementation.Validators
     {
         public UserInsertDtoValidator(ZenithContext ctx) : base(ctx)
         {
+            //Ako je must false onda ce vratiti gresku withMessage
             RuleFor(x => x.Email)
-                .Must(x => !ctx.Users.Any(u => u.Email == x))
+                .Must(x => !ctx.Users.Any(u => u.Email == x && u.IsActive && u.DeletedAt == null))
                 .WithMessage("Email is already in use.");
 
             RuleFor(x => x.Username)
-                .Must(x => !ctx.Users.Any(u => u.Username == x))
+                .Must(x => !ctx.Users.Any(u => u.Username == x && u.IsActive && u.DeletedAt == null))
                 .WithMessage("Username is already in use.");
         }
     }
