@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.Users;
 using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.DataAccess;
 using Zenith_API.Domain;
@@ -16,9 +16,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
 {
     public class EfRegisterUserCommand : EfUseCase, IRegisterUserCommand
     {
-        private RegisterUserDtoValidator _validator;
+        private UserInsertDtoValidator _validator;
 
-        public EfRegisterUserCommand(ZenithContext context, RegisterUserDtoValidator validator) : base(context)
+        public EfRegisterUserCommand(ZenithContext context, UserInsertDtoValidator validator) : base(context)
         {
             _validator = validator;
         }
@@ -27,7 +27,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
 
         public string Name => "UserRegistration";
 
-        public void Execute(RegisterUserDTO data)
+        public void Execute(UserInsertUpdateDTO data)
         {
             _validator.ValidateAndThrow(data);
 

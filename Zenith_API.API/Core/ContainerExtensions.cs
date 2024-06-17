@@ -51,6 +51,7 @@ namespace Zenith_API.API.Core
             //Commands
                 //User
             services.AddTransient<IRegisterUserCommand, EfRegisterUserCommand>();
+            services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
                 //Track
             services.AddTransient<ICreateTrackCommand, EfCreateTrackCommand>();
                 //FileType
@@ -75,7 +76,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IDeleteMediaTypeCommand, EfDeleteMediaTypeCommand>();
 
             //Validators
-            services.AddTransient<RegisterUserDtoValidator>();
+            services.AddTransient<UserInsertDtoValidator>();
             services.AddTransient<CreateTrackDTOValidator>();
             services.AddTransient<FileTypeDTOValidator>();
             services.AddTransient<FileTypeUpdateDTOValidator>();

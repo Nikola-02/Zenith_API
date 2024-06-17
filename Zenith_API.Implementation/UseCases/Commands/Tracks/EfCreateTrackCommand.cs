@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.DataAccess;
 using Zenith_API.Domain;

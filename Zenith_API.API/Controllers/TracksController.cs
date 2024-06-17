@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
-using Zenith_API.Application.DTO;
+using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Implementation;
 

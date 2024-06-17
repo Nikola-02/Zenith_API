@@ -7,7 +7,7 @@ using Zenith_API.Application.DTO.Users;
 
 namespace Zenith_API.Application.UseCases.Commands.Users
 {
-    public interface IRegisterUserCommand : ICommand<UserInsertUpdateDTO>
+    public interface IUpdateUserCommand : ICommand<UserInsertUpdateDTO>
     {
     }
 }
