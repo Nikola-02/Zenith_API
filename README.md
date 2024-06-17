@@ -5,6 +5,9 @@ Email: admin@gmail.com
 
 Password: Admin1234
 
+# Getting started
+- Download database file and execute it in your DBMS, it will create database with data
+
 # Overview
 Welcome to the Zenith Music Library API, an ASP.NET-based application designed for music enthusiasts and developers alike. This robust API allows you to interact with a vast collection of songs, providing functionalities such as display, search, add, delete, update, playlist management, song liking, and streaming.
 
