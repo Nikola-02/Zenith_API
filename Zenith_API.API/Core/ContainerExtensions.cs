@@ -5,6 +5,7 @@ using Zenith_API.Application.UseCases.Commands.Artists;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
 using Zenith_API.Application.UseCases.Commands.Genres;
 using Zenith_API.Application.UseCases.Commands.MediaTypes;
+using Zenith_API.Application.UseCases.Commands.Playlists;
 using Zenith_API.Application.UseCases.Commands.TrackLikes;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Application.UseCases.Commands.Users;
@@ -22,6 +23,7 @@ using Zenith_API.Implementation.UseCases.Commands.Artists;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
 using Zenith_API.Implementation.UseCases.Commands.Genres;
 using Zenith_API.Implementation.UseCases.Commands.MediaTypes;
+using Zenith_API.Implementation.UseCases.Commands.Playlists;
 using Zenith_API.Implementation.UseCases.Commands.TrackLikes;
 using Zenith_API.Implementation.UseCases.Commands.Tracks;
 using Zenith_API.Implementation.UseCases.Commands.Users;
@@ -85,6 +87,8 @@ namespace Zenith_API.API.Core
                 //TrackLikes
             services.AddTransient<ILikeTrackCommand, EfLikeTrackCommand>();
             services.AddTransient<IUndoLikeTrackCommand, EfUndoLikeTrackCommand>();
+                //Playlists
+            services.AddTransient<ICreatePlaylistCommand, EfCreatePlaylistCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();

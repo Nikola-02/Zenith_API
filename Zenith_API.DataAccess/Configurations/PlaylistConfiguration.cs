@@ -17,8 +17,7 @@ namespace Zenith_API.DataAccess.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.HasIndex(x => x.Name)
-                .IsUnique();
+            builder.HasIndex(x => x.Name);
 
             builder.HasOne(x => x.User)
                 .WithMany(x => x.Playlists)

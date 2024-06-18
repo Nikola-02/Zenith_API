@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith_API.Application;
 using Zenith_API.Application.DTO;
 using Zenith_API.DataAccess;
 
@@ -135,6 +136,26 @@ namespace Zenith_API.Implementation.Validators
             : base(context)
         {
   
+        }
+    }
+
+    public class PlaylistDTOValidator : BaseLookupDTOValidator
+    {
+        public PlaylistDTOValidator(ZenithContext context, IApplicationActor _actor)
+            :base(context)
+        {
+            RuleFor(x => x.Name)
+                .Must(x => !Context.Playlists.Any(t => t.Name == x && t.IsActive && t.DeletedAt == null && _actor.Id == t.UserId))
+                .WithMessage("Playlist for you with same name already exists.");
+        }
+    }
+
+    public class PlaylistUpdateDTOValidator : BaseLookupDTOValidator
+    {
+        public PlaylistUpdateDTOValidator(ZenithContext context)
+            : base(context)
+        {
+
         }
     }
 }
