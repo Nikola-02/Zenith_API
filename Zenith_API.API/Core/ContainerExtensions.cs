@@ -89,6 +89,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IUndoLikeTrackCommand, EfUndoLikeTrackCommand>();
                 //Playlists
             services.AddTransient<ICreatePlaylistCommand, EfCreatePlaylistCommand>();
+            services.AddTransient<IUpdatePlaylistCommand, EfUpdatePlaylistCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();

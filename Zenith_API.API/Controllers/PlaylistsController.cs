@@ -47,8 +47,12 @@ namespace Zenith_API.API.Controllers
 
         // PUT api/<PlaylistsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] PlaylistInsertUpdateDTO dto,
+                                   [FromServices] IUpdatePlaylistCommand command)
         {
+            dto.Id = id;
+            _handler.HandleCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<PlaylistsController>/5
