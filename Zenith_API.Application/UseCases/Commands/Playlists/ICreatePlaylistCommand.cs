@@ -8,7 +8,7 @@ using Zenith_API.Application.DTO.Playlists;
 
 namespace Zenith_API.Application.UseCases.Commands.Playlists
 {
-    public interface ICreatePlaylistCommand : ICommand<LookupTablesInsertUpdateDTO>
+    public interface ICreatePlaylistCommand : ICommand<PlaylistInsertUpdateDTO>
     {
     }
 }

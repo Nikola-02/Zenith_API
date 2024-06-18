@@ -28,7 +28,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
 
         public string Name => "Create playlist";
 
-        public void Execute(LookupTablesInsertUpdateDTO data)
+        public void Execute(PlaylistInsertUpdateDTO data)
         {
             _validator.ValidateAndThrow(data);
 

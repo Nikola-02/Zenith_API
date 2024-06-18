@@ -107,6 +107,8 @@ namespace Zenith_API.API.Core
             services.AddTransient<MediaTypeDTOValidator>();
             services.AddTransient<MediaTypeUpdateDTOValidator>();
             services.AddTransient<MediaTypeUpdateDTOValidator>();
+            services.AddTransient<PlaylistDTOValidator>();
+            services.AddTransient<PlaylistUpdateDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

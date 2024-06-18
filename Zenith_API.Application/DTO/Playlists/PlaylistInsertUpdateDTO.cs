@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.Playlists
 {
-    public class PlaylistInsertUpdateDTO
+    public class PlaylistInsertUpdateDTO : LookupTablesInsertUpdateDTO
     {
-        public string Name { get; set; }
+
     }
 }

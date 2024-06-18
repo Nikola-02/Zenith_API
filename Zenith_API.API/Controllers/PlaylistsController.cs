@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.Playlists;
 using Zenith_API.Application.UseCases.Commands.Albums;
+using Zenith_API.Application.UseCases.Commands.Playlists;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
 
