@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 using Zenith_API.Application.DTO.Tracks;
+using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Implementation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -58,8 +59,10 @@ namespace Zenith_API.API.Controllers
 
         // DELETE api/<TracksController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteTrackCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }

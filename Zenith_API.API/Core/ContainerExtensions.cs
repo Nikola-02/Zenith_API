@@ -59,6 +59,7 @@ namespace Zenith_API.API.Core
                 //Track
             services.AddTransient<ICreateTrackCommand, EfCreateTrackCommand>();
             services.AddTransient<IUpdateTrackCommand, EfUpdateTrackCommand>();
+            services.AddTransient<IDeleteTrackCommand, EfDeleteTrackCommand>();
                 //FileType
             services.AddTransient<ICreateFileTypeCommand, EfCreateFileTypeCommand>();
             services.AddTransient<IUpdateFileTypeCommand, EfUpdateFileTypeCommand>();
