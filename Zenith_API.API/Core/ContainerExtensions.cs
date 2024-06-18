@@ -90,6 +90,7 @@ namespace Zenith_API.API.Core
                 //Playlists
             services.AddTransient<ICreatePlaylistCommand, EfCreatePlaylistCommand>();
             services.AddTransient<IUpdatePlaylistCommand, EfUpdatePlaylistCommand>();
+            services.AddTransient<IDeletePlaylistCommand, EfDeletePlaylistCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();
