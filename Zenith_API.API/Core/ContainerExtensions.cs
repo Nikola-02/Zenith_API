@@ -84,6 +84,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IDeleteMediaTypeCommand, EfDeleteMediaTypeCommand>();
                 //TrackLikes
             services.AddTransient<ILikeTrackCommand, EfLikeTrackCommand>();
+            services.AddTransient<IUndoLikeTrackCommand, EfUndoLikeTrackCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();

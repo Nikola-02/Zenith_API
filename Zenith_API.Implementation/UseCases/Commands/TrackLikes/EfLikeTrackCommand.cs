@@ -33,13 +33,12 @@ namespace Zenith_API.Implementation.UseCases.Commands.TrackLikes
         {
             _validator.ValidateAndThrow(data);
 
-            var alreadyLiked = Context.Likes.Any(x=>x.TrackId == data.TrackId && x.UserId == _actor.Id);
+            var alreadyLiked = Context.Likes.Any(x => x.TrackId == data.TrackId && x.UserId == _actor.Id);
 
             if (alreadyLiked)
             {
-                throw new ConflictException("You have already liked this track.");
+                throw new ConflictException("You already liked this track.");
             }
-
 
             Like like = new Like()
             {

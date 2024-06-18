@@ -31,8 +31,10 @@ namespace Zenith_API.API.Controllers
 
         // DELETE api/<TrackLikesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IUndoLikeTrackCommand command)
         {
+            _handler.HandleCommand(command, id);
+            return NoContent();
         }
     }
 }
