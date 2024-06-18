@@ -35,6 +35,8 @@ namespace Zenith_API.Implementation.UseCases.Commands.TrackLikes
             }
 
             Context.Likes.Remove(likeForActorAndTrack);
+
+            Context.SaveChanges();
         }
     }
 }
