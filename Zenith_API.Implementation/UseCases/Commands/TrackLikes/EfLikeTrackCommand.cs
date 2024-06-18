@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith_API.Application;
 using Zenith_API.Application.DTO.TrackLikes;
 using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.TrackLikes;
@@ -16,9 +17,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.TrackLikes
     public class EfLikeTrackCommand : EfUseCase, ILikeTrackCommand
     {
         public LikeTrackDTOValidator _validator { get; set; }
-        public Actor _actor { get; set; }
+        public IApplicationActor _actor { get; set; }
 
-        public EfLikeTrackCommand(LikeTrackDTOValidator validator, ZenithContext context, Actor actor) : base(context)
+        public EfLikeTrackCommand(LikeTrackDTOValidator validator, ZenithContext context, IApplicationActor actor) : base(context)
         {
             _validator = validator;
             _actor = actor;

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Zenith_API.Application.DTO.TrackLikes;
 using Zenith_API.Application.DTO.Tracks;
+using Zenith_API.Application.UseCases.Commands.TrackLikes;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Implementation;
 
