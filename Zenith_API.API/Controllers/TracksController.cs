@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
+using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Tracks;
+using Zenith_API.Application.UseCases.Queries.Albums;
+using Zenith_API.Application.UseCases.Queries.Tracks;
 using Zenith_API.Implementation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -24,9 +27,10 @@ namespace Zenith_API.API.Controllers
 
         // GET: api/<TracksController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] TrackSearch search,
+                                [FromServices] IGetTracksQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_handler.HandleQuery(query,search));
         }
 
         // GET api/<TracksController>/5
