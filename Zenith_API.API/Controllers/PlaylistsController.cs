@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.Playlists;
+using Zenith_API.Application.DTO.TrackLikes;
 using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Playlists;
 using Zenith_API.DataAccess;
@@ -25,9 +26,9 @@ namespace Zenith_API.API.Controllers
 
         // GET: api/<PlaylistsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok();
         }
 
         // GET api/<PlaylistsController>/5
@@ -62,6 +63,16 @@ namespace Zenith_API.API.Controllers
         {
             _handler.HandleCommand(command, id);
             return NoContent();
+        }
+
+        // POST api/<PlaylistsController>/5/track
+        [HttpPost("{id}/track")]
+        public IActionResult AddTrackToPlaylist(int id, [FromBody] AddTrackToPlaylistDTO dto,
+                                                        [FromServices] IAddTrackToPlaylistCommand command)
+        {
+            dto.PlaylistId = id;
+            _handler.HandleCommand(command, dto);
+            return StatusCode(201);
         }
     }
 }
