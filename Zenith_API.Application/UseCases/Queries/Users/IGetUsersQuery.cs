@@ -8,7 +8,7 @@ using Zenith_API.Application.DTO.Users;
 
 namespace Zenith_API.Application.UseCases.Queries.Users
 {
-    public interface IGetUsersQuery: IQuery<PagedResponse<UserDTO>, UserSearch>
+    public interface IGetUsersQuery : IQuery<PagedResponse<UserDTO>, UserSearch>
     {
     }
 }
