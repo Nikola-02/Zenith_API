@@ -14,6 +14,7 @@ using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
 using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.Application.UseCases.Queries.MediaTypes;
+using Zenith_API.Application.UseCases.Queries.Playlists;
 using Zenith_API.Application.UseCases.Queries.Tracks;
 using Zenith_API.Application.UseCases.Queries.Users;
 using Zenith_API.Implementation;
@@ -33,6 +34,7 @@ using Zenith_API.Implementation.UseCases.Queries.Artists;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
 using Zenith_API.Implementation.UseCases.Queries.Genres;
 using Zenith_API.Implementation.UseCases.Queries.MediaTypes;
+using Zenith_API.Implementation.UseCases.Queries.Playlists;
 using Zenith_API.Implementation.UseCases.Queries.Tracks;
 using Zenith_API.Implementation.UseCases.Queries.Users;
 using Zenith_API.Implementation.Validators;
@@ -57,6 +59,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetMediaTypesQuery, EfGetMediaTypesQuery>();
             services.AddTransient<IGetUsersQuery, EfGetUsersQuery>();
             services.AddTransient<IGetTracksQuery, EfGetTracksQuery>();
+            services.AddTransient<IGetPlaylistsQuery, EfGetPlaylistsQuery>();
 
             //Commands
                 //User
@@ -130,6 +133,7 @@ namespace Zenith_API.API.Core
             services.AddAutoMapper(typeof(MediaTypeProfile));
             services.AddAutoMapper(typeof(UserProfile));
             services.AddAutoMapper(typeof(TrackProfile));
+            services.AddAutoMapper(typeof(PlaylistProfile));
         }
 
         public static Guid? GetTokenId(this HttpRequest request)

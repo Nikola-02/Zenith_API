@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.Playlists;
 using Zenith_API.Application.DTO.TrackLikes;
+using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Playlists;
+using Zenith_API.Application.UseCases.Queries.Playlists;
+using Zenith_API.Application.UseCases.Queries.Tracks;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -24,11 +28,13 @@ namespace Zenith_API.API.Controllers
             _handler = handler;
         }
 
+        //Vracanje svih plejlista za "administratora"
         // GET: api/<PlaylistsController>
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] PlaylistSearch search,
+                                [FromServices] IGetPlaylistsQuery query)
         {
-            return Ok();
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // GET api/<PlaylistsController>/5
@@ -65,6 +71,7 @@ namespace Zenith_API.API.Controllers
             return NoContent();
         }
 
+        //Dodavanje track u plejlistu
         // POST api/<PlaylistsController>/5/track
         [HttpPost("{id}/track")]
         public IActionResult AddTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
@@ -75,6 +82,7 @@ namespace Zenith_API.API.Controllers
             return StatusCode(201);
         }
 
+        //Brisanje track iz plejliste
         // DELETE api/<PlaylistsController>/5/track
         [HttpDelete("{id}/track")]
         public IActionResult RemoveTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
