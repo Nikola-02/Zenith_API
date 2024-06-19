@@ -5,6 +5,9 @@ Email: admin@gmail.com
 
 Password: Admin1234
 
+# Swagger documentation
+http://localhost:5001/swagger
+
 # Getting started
 - Download database file and execute it in your DBMS, it will create database with data
 
