@@ -13,10 +13,12 @@ namespace Zenith_API.Implementation.Validators
     {
         public LikeTrackDTOValidator(ZenithContext context)
         {
+            CascadeMode = CascadeMode.StopOnFirstFailure;
+
             RuleFor(x => x.TrackId)
                 .NotEmpty()
                 .WithMessage("Track is required.")
-                .Must(x=>context.Tracks.Any(t=>t.Id == x))
+                .Must(x=>context.Tracks.Any(t=>t.Id == x && t.IsActive && t.DeletedAt == null))
                 .WithMessage("Track doesn't exist.");
         }
     }

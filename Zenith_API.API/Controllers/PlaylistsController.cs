@@ -67,12 +67,22 @@ namespace Zenith_API.API.Controllers
 
         // POST api/<PlaylistsController>/5/track
         [HttpPost("{id}/track")]
-        public IActionResult AddTrackToPlaylist(int id, [FromBody] AddTrackToPlaylistDTO dto,
+        public IActionResult AddTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
                                                         [FromServices] IAddTrackToPlaylistCommand command)
         {
             dto.PlaylistId = id;
             _handler.HandleCommand(command, dto);
             return StatusCode(201);
+        }
+
+        // DELETE api/<PlaylistsController>/5/track
+        [HttpDelete("{id}/track")]
+        public IActionResult RemoveTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
+                                                        [FromServices] IRemoveTrackFromPlaylistCommand command)
+        {
+            dto.PlaylistId = id;
+            _handler.HandleCommand(command, dto);
+            return NoContent();
         }
     }
 }

@@ -7,7 +7,7 @@ using Zenith_API.Application.DTO.Playlists;
 
 namespace Zenith_API.Application.UseCases.Commands.Playlists
 {
-    public interface IAddTrackToPlaylistCommand : ICommand<TrackToPlaylistDTO>
+    public interface IRemoveTrackFromPlaylistCommand : ICommand<TrackToPlaylistDTO>
     {
     }
 }

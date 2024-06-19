@@ -95,6 +95,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IUpdatePlaylistCommand, EfUpdatePlaylistCommand>();
             services.AddTransient<IDeletePlaylistCommand, EfDeletePlaylistCommand>();
             services.AddTransient<IAddTrackToPlaylistCommand, EfAddTrackToPlaylistCommand>();
+            services.AddTransient<IRemoveTrackFromPlaylistCommand, EfRemoveTrackFromPlaylistCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();
@@ -116,6 +117,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<PlaylistDTOValidator>();
             services.AddTransient<PlaylistUpdateDTOValidator>();
             services.AddTransient<PlaylistTrackDTOValidator>();
+            services.AddTransient<RemoveTrackFromPlaylistDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)

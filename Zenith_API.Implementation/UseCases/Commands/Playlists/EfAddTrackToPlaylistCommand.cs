@@ -16,7 +16,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
     public class EfAddTrackToPlaylistCommand : EfUseCase, IAddTrackToPlaylistCommand
     {
         public PlaylistTrackDTOValidator _validator { get; set; }
-        public EfAddTrackToPlaylistCommand(PlaylistTrackDTOValidator validator,ZenithContext context) : base(context)
+        public EfAddTrackToPlaylistCommand(PlaylistTrackDTOValidator validator, ZenithContext context) : base(context)
         {
             _validator = validator;
         }
@@ -25,7 +25,7 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
 
         public string Name => "Add Track to Playlist";
 
-        public void Execute(AddTrackToPlaylistDTO data)
+        public void Execute(TrackToPlaylistDTO data)
         {
             _validator.ValidateAndThrow(data);
 

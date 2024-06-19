@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Zenith_API.Application.DTO.Playlists
 {
-    public class AddTrackToPlaylistDTO
+    public class TrackToPlaylistDTO
     {
         public int? PlaylistId { get; set; }
         public int TrackId { get; set; }
