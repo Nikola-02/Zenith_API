@@ -43,6 +43,11 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
                 throw new EntityNotFoundException(Context.Tracks.GetType().ToString(), Id);
             }
 
+            var alreadyAdded = Context.PlaylistTracks.Any(pt => pt.TrackId == data.TrackId && pt.PlaylistId == data.PlaylistId);
+
+            if (alreadyAdded)
+                throw new ConflictException("Track is already added to this Playlist.");
+
             playlist.Tracks.Add(trackToAdd);
 
             Context.SaveChanges();
