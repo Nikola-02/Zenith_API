@@ -27,30 +27,5 @@ namespace Zenith_API.API.Controllers
         {
             return Ok(_handler.HandleQuery(query, search));
         }
-
-        // GET api/<UseCaseLogsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<UseCaseLogsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<UseCaseLogsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<UseCaseLogsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }

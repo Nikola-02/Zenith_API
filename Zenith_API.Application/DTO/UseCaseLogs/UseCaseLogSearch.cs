@@ -10,5 +10,6 @@ namespace Zenith_API.Application.DTO.UseCaseLogs
     {
         public DateTime? DateFrom { get; set; }
         public DateTime? DateTo { get; set; }
+        public SortBy Sort { get; set; }
     }
 }

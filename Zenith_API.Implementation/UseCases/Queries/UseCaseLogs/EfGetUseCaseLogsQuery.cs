@@ -42,7 +42,22 @@ namespace Zenith_API.Implementation.UseCases.Queries.UseCaseLogs
                 query = query.Where(x => x.ExecutedAt <= search.DateTo);
             }
 
-            int totalCount = query.Count();
+            if (search.Sort == null)
+            {
+                query = query.OrderByDescending(x => x.ExecutedAt);
+            }
+            else
+            {
+                if (search.Sort.SortProperty == "executedAt")
+                {
+                    if (search.Sort.Direction == SortDirection.Asc)
+                    {
+                        query = query.OrderBy(x => x.ExecutedAt);
+                    }
+                }
+            }
+
+                int totalCount = query.Count();
 
             int perPage = search.PerPage.HasValue ? (int)Math.Abs((double)search.PerPage) : 10;
             int page = search.Page.HasValue ? (int)Math.Abs((double)search.Page) : 1;
