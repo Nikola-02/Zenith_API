@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using Zenith_API.Application;
+using Zenith_API.Application.UseCases.Commands.AccessUseCases;
 using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Artists;
 using Zenith_API.Application.UseCases.Commands.FileTypes;
@@ -21,6 +22,7 @@ using Zenith_API.Application.UseCases.Queries.Users;
 using Zenith_API.Implementation;
 using Zenith_API.Implementation.Logging.UseCases;
 using Zenith_API.Implementation.Mapper;
+using Zenith_API.Implementation.UseCases.Commands;
 using Zenith_API.Implementation.UseCases.Commands.Albums;
 using Zenith_API.Implementation.UseCases.Commands.Artists;
 using Zenith_API.Implementation.UseCases.Commands.FileTypes;
@@ -103,6 +105,8 @@ namespace Zenith_API.API.Core
             services.AddTransient<IDeletePlaylistCommand, EfDeletePlaylistCommand>();
             services.AddTransient<IAddTrackToPlaylistCommand, EfAddTrackToPlaylistCommand>();
             services.AddTransient<IRemoveTrackFromPlaylistCommand, EfRemoveTrackFromPlaylistCommand>();
+                //AccessUseCases
+            services.AddTransient<IUpdateAccessUseCasesCommand, EfUpdateAccessUseCasesCommand>();
 
             //Validators
             services.AddTransient<UserInsertDtoValidator>();
@@ -125,6 +129,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<PlaylistUpdateDTOValidator>();
             services.AddTransient<PlaylistTrackDTOValidator>();
             services.AddTransient<RemoveTrackFromPlaylistDTOValidator>();
+            services.AddTransient<UpdateAccessUseCasesDTOValidator>();
         }
 
         public static void AddAutoMapperProfiles(this IServiceCollection services)
