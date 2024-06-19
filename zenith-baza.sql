@@ -1,7 +1,7 @@
 USE [master]
 GO
 
-/****** Object:  Database [Zenith]    Script Date: 6/18/2024 12:27:01 AM ******/
+/****** Object:  Database [Zenith]    Script Date: 6/19/2024 1:06:08 AM ******/
 CREATE DATABASE [Zenith]
  CONTAINMENT = NONE
  ON  PRIMARY 
