@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Zenith_API.Application.DTO.TrackLikes;
 using Zenith_API.Application.DTO.Tracks;
 using Zenith_API.Application.UseCases.Commands.TrackLikes;
@@ -21,6 +22,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // POST api/<TrackLikesController>
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] TrackLikeDTO dto,
                                   [FromServices] ILikeTrackCommand command)
@@ -30,6 +32,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // DELETE api/<TrackLikesController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IUndoLikeTrackCommand command)
         {

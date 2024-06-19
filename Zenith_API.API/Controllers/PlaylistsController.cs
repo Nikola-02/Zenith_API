@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using Zenith_API.Application.DTO.Albums;
@@ -38,13 +39,15 @@ namespace Zenith_API.API.Controllers
         }
 
         // GET api/<PlaylistsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [Authorize]
+        [HttpGet("/mine")]
+        public IActionResult Get()
         {
-            return "value";
+            return Ok();
         }
 
         // POST api/<PlaylistsController>
+        [Authorize]
         [HttpPost]
         public IActionResult Post([FromBody] PlaylistInsertUpdateDTO dto,
                                    [FromServices] ICreatePlaylistCommand command)
@@ -54,6 +57,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // PUT api/<PlaylistsController>/5
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] PlaylistInsertUpdateDTO dto,
                                    [FromServices] IUpdatePlaylistCommand command)
@@ -64,6 +68,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // DELETE api/<PlaylistsController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeletePlaylistCommand command)
         {
@@ -73,6 +78,7 @@ namespace Zenith_API.API.Controllers
 
         //Dodavanje track u plejlistu
         // POST api/<PlaylistsController>/5/track
+        [Authorize]
         [HttpPost("{id}/track")]
         public IActionResult AddTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
                                                         [FromServices] IAddTrackToPlaylistCommand command)
@@ -84,6 +90,7 @@ namespace Zenith_API.API.Controllers
 
         //Brisanje track iz plejliste
         // DELETE api/<PlaylistsController>/5/track
+        [Authorize]
         [HttpDelete("{id}/track")]
         public IActionResult RemoveTrackToPlaylist(int id, [FromBody] TrackToPlaylistDTO dto,
                                                         [FromServices] IRemoveTrackFromPlaylistCommand command)

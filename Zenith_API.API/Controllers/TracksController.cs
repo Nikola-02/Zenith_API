@@ -62,6 +62,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // DELETE api/<TracksController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteTrackCommand command)
         {

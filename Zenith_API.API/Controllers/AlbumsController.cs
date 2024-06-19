@@ -57,6 +57,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // DELETE api/<AlbumsController>/5
+        [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteAlbumCommand command)
         {
