@@ -38,12 +38,13 @@ namespace Zenith_API.API.Controllers
             return Ok(_handler.HandleQuery(query, search));
         }
 
-        // GET api/<PlaylistsController>/5
+        // GET api/<PlaylistsController>/
         [Authorize]
-        [HttpGet("/mine")]
-        public IActionResult Get()
+        [HttpGet("mine")]
+        public IActionResult Get([FromQuery] PlaylistSearch search, 
+                                 [FromServices] IGetPlaylistForUserQuery query)
         {
-            return Ok();
+            return Ok(_handler.HandleQuery(query,search));
         }
 
         // POST api/<PlaylistsController>
