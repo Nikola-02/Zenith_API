@@ -17,5 +17,6 @@ namespace Zenith_API.Application.DTO.Tracks
         public int? ArtistId { get; set; }
         public int? GenreId { get; set; }
         public int? MediaTypeId { get; set; }
+        public SortBy Sort { get; set; }
     }
 }

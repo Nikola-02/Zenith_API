@@ -77,6 +77,49 @@ namespace Zenith_API.Implementation.UseCases.Queries.Tracks
                 query = query.Where(x => x.MediaTypeId == search.MediaTypeId);
             }
 
+            if (search.Sort == null)
+            {
+                query = query.OrderBy(x => x.CreatedAt);
+            }
+            else
+            {
+                if (search.Sort.SortProperty == "price")
+                {
+                    if (search.Sort.Direction == SortDirection.Asc)
+                    {
+                        query = query.OrderBy(x => x.Prices.FirstOrDefault(p => p.IsActive && p.DeletedAt == null).Amount);
+                    }
+                    else
+                    {
+                        query = query.OrderByDescending(x => x.Prices.FirstOrDefault(p => p.IsActive && p.DeletedAt == null).Amount);
+                    }
+                }
+
+                if (search.Sort.SortProperty == "duration")
+                {
+                    if (search.Sort.Direction == SortDirection.Asc)
+                    {
+                        query = query.OrderBy(x => x.Duration);
+                    }
+                    else
+                    {
+                        query = query.OrderByDescending(x => x.Duration);
+                    }
+                }
+
+                if (search.Sort.SortProperty == "name")
+                {
+                    if (search.Sort.Direction == SortDirection.Asc)
+                    {
+                        query = query.OrderBy(x => x.Name);
+                    }
+                    else
+                    {
+                        query = query.OrderByDescending(x => x.Name);
+                    }
+                }
+            }
+
             int totalCount = query.Count();
 
             int perPage = search.PerPage.HasValue ? (int)Math.Abs((double)search.PerPage) : 10;
