@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Zenith_API.Application.DTO.FileTypes;
 using Zenith_API.Application.DTO.Users;
@@ -14,6 +15,7 @@ namespace Zenith_API.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowAllOrigins")]
     public class UsersController : ControllerBase
     {
         private UseCaseHandler _handler;

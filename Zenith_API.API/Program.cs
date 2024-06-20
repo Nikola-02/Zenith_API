@@ -38,6 +38,17 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<IExceptionLogger, DbExceptionLogger>();
 builder.Services.AddTransient<ITokenStorage, InMemoryTokenStorage>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddTransient<IApplicationActorProvider>(x =>
 {
     var accessor = x.GetService<IHttpContextAccessor>();
@@ -115,6 +126,8 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("AllowAllOrigins");
 
 app.UseStaticFiles();
 
