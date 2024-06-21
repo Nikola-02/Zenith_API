@@ -40,7 +40,9 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
                 Password = BCrypt.Net.BCrypt.HashPassword(data.Password),
                 UseCases = new List<UserUseCase>()
                 {
-                    new UserUseCase() { UseCaseId = 2 }
+                    new UserUseCase() { UseCaseId = 2 },
+                    new UserUseCase() { UseCaseId = 33 },
+                    new UserUseCase() { UseCaseId = 40 },
                 }
             };
 

@@ -66,6 +66,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetPlaylistsQuery, EfGetPlaylistsQuery>();
             services.AddTransient<IGetPlaylistForUserQuery, EfGetPlaylistForUserQuery>();
             services.AddTransient<IGetUseCaseLogsQuery, EfGetUseCaseLogsQuery>();
+            services.AddTransient<IGetSingleTrackQuery, EfGetSingleTrackQuery>();
 
             //Commands
                 //User

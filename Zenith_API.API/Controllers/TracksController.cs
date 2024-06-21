@@ -35,9 +35,11 @@ namespace Zenith_API.API.Controllers
 
         // GET api/<TracksController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromQuery] SingleTrackSearch search,
+                                [FromServices] IGetSingleTrackQuery query)
         {
-            return "value";
+            search.Id = id;
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // POST api/<TracksController>
