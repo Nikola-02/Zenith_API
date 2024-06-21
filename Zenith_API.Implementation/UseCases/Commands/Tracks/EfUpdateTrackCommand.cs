@@ -53,6 +53,10 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
                         FileType = imageFileType
                     };
 
+                    var fileToRemove = track.Files.FirstOrDefault(x=>x.FileType.Name == "image");
+
+                    track.Files.Remove(fileToRemove);
+
                     track.Files.Add(fileImage);
 
                 }
@@ -66,6 +70,10 @@ namespace Zenith_API.Implementation.UseCases.Commands.Tracks
                         FileName = data.TrackFiles.SongPath,
                         FileType = songFileType
                     };
+
+                    var fileToRemove = track.Files.FirstOrDefault(x => x.FileType.Name == "audio");
+
+                    track.Files.Remove(fileToRemove);
 
                     track.Files.Add(fileSong);
                 }
