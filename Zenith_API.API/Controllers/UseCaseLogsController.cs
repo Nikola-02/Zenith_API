@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.UseCaseLogs;
 using Zenith_API.Application.UseCases.Queries.Albums;
@@ -21,6 +22,7 @@ namespace Zenith_API.API.Controllers
         }
 
         // GET: api/<UseCaseLogsController>
+        [Authorize]
         [HttpGet]
         public IActionResult Get([FromQuery] UseCaseLogSearch search,
                                 [FromServices] IGetUseCaseLogsQuery query)

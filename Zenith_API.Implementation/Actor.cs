@@ -34,6 +34,6 @@ namespace Zenith_API.Implementation
 
         public string LastName => "unauthorized";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 1 };
+        public IEnumerable<int> AllowedUseCases => new List<int> { 1, 33 };
     }
 }
