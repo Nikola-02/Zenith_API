@@ -13,6 +13,7 @@ using Zenith_API.Application.UseCases.Commands.Users;
 using Zenith_API.Application.UseCases.Queries.Albums;
 using Zenith_API.Application.UseCases.Queries.Artists;
 using Zenith_API.Application.UseCases.Queries.FileTypes;
+using Zenith_API.Application.UseCases.Queries.Filters;
 using Zenith_API.Application.UseCases.Queries.Genres;
 using Zenith_API.Application.UseCases.Queries.MediaTypes;
 using Zenith_API.Application.UseCases.Queries.Playlists;
@@ -35,6 +36,7 @@ using Zenith_API.Implementation.UseCases.Commands.Users;
 using Zenith_API.Implementation.UseCases.Queries.Albums;
 using Zenith_API.Implementation.UseCases.Queries.Artists;
 using Zenith_API.Implementation.UseCases.Queries.FileTypes;
+using Zenith_API.Implementation.UseCases.Queries.Filters;
 using Zenith_API.Implementation.UseCases.Queries.Genres;
 using Zenith_API.Implementation.UseCases.Queries.MediaTypes;
 using Zenith_API.Implementation.UseCases.Queries.Playlists;
@@ -67,6 +69,7 @@ namespace Zenith_API.API.Core
             services.AddTransient<IGetPlaylistForUserQuery, EfGetPlaylistForUserQuery>();
             services.AddTransient<IGetUseCaseLogsQuery, EfGetUseCaseLogsQuery>();
             services.AddTransient<IGetSingleTrackQuery, EfGetSingleTrackQuery>();
+            services.AddTransient<IGetFiltersQuery, EfGetFiltersQuery>();
 
             //Commands
                 //User
