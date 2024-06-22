@@ -32,10 +32,10 @@ namespace Zenith_API.Implementation.UseCases.Queries.Filters
             var genresQuery = Context.Genres.AsQueryable();
             var mediaTypesQuery = Context.MediaTypes.AsQueryable();
 
-            albumQuery.Where(x=>x.IsActive && x.DeletedAt == null);
-            artistsQuery.Where(x=>x.IsActive && x.DeletedAt == null);
-            genresQuery.Where(x=>x.IsActive && x.DeletedAt == null);
-            mediaTypesQuery.Where(x=>x.IsActive && x.DeletedAt == null);
+            albumQuery = albumQuery.Where(x=>x.IsActive && x.DeletedAt == null);
+            artistsQuery = artistsQuery.Where(x=>x.IsActive && x.DeletedAt == null);
+            genresQuery = genresQuery.Where(x=>x.IsActive && x.DeletedAt == null);
+            mediaTypesQuery = mediaTypesQuery.Where(x=>x.IsActive && x.DeletedAt == null);
 
             return new FiltersDTO
             {
