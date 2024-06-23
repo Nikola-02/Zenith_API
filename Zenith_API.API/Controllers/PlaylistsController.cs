@@ -41,10 +41,10 @@ namespace Zenith_API.API.Controllers
         // GET api/<PlaylistsController>/
         [Authorize]
         [HttpGet("mine")]
-        public IActionResult Get([FromQuery] PlaylistSearch search, 
+        public IActionResult Get([FromQuery] PlaylistSearch search,
                                  [FromServices] IGetPlaylistForUserQuery query)
         {
-            return Ok(_handler.HandleQuery(query,search));
+            return Ok(_handler.HandleQuery(query, search));
         }
 
         // POST api/<PlaylistsController>
@@ -85,6 +85,17 @@ namespace Zenith_API.API.Controllers
                                                         [FromServices] IAddTrackToPlaylistCommand command)
         {
             dto.PlaylistId = id;
+            _handler.HandleCommand(command, dto);
+            return StatusCode(201);
+        }
+
+        //Dodavanje track u VISE playlisti
+        // POST api/<PlaylistsController>/track
+        [Authorize]
+        [HttpPost("track")]
+        public IActionResult AddTrackToPlaylists([FromBody] TrackToPlaylistsDTO dto,
+                                                        [FromServices] IAddTrackToPlaylistsCommand command)
+        {
             _handler.HandleCommand(command, dto);
             return StatusCode(201);
         }
