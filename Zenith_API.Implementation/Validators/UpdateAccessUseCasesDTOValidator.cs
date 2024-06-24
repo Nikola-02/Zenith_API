@@ -11,7 +11,7 @@ namespace Zenith_API.Implementation.Validators
 {
     public class UpdateAccessUseCasesDTOValidator : AbstractValidator<AccessUseCaseDTO>
     {
-        private static int UpdateUseCaseAccessId = 39;
+        public static int UpdateUseCaseAccessId = 39;
 
         public UpdateAccessUseCasesDTOValidator(ZenithContext context)
         {

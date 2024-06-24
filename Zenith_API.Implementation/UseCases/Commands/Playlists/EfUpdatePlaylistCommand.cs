@@ -2,8 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith_API.Application;
 using Zenith_API.Application.DTO.Playlists;
 using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.Playlists;
@@ -16,9 +18,12 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
     {
         public PlaylistUpdateDTOValidator _validator { get; set; }
 
-        public EfUpdatePlaylistCommand(PlaylistUpdateDTOValidator validator, ZenithContext context) : base(context)
+        private IApplicationActor _actor;
+
+        public EfUpdatePlaylistCommand(PlaylistUpdateDTOValidator validator, ZenithContext context, IApplicationActor actor) : base(context)
         {
             _validator = validator;
+            _actor = actor;
         }
 
         public int Id => 31;
@@ -34,6 +39,14 @@ namespace Zenith_API.Implementation.UseCases.Commands.Playlists
             if (playlist == null)
             {
                 throw new EntityNotFoundException(Context.Playlists.GetType().ToString(), Id);
+            }
+
+            var isAuthorOfPlaylist = playlist.UserId == _actor.Id;
+            var isAdmin = _actor.AllowedUseCases.Contains(UpdateAccessUseCasesDTOValidator.UpdateUseCaseAccessId);
+
+            if (!isAuthorOfPlaylist && !isAdmin)
+            {
+                throw new ConflictException("You are not the owner of this playlist or you are not admin.");
             }
 
             playlist.Name = data.Name;
