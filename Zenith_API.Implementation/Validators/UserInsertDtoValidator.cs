@@ -33,12 +33,7 @@ namespace Zenith_API.Implementation.Validators
                                             .MinimumLength(2)
                                             .WithMessage("Minimum length for LastName is 2.");
 
-            RuleFor(x => x.Password)
-                                            .NotEmpty()
-                                            .WithMessage("Password is required.")
-                                            .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
-                                            .WithMessage("Password is not in right format. Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
-
+            
             RuleFor(x => x.Username)
                 .NotEmpty()
                 .WithMessage("Username is required.");
@@ -50,6 +45,10 @@ namespace Zenith_API.Implementation.Validators
     {
         public UserUpdateDtoValidator(ZenithContext ctx) : base(ctx)
         {
+            RuleFor(x => x.Password)
+                                            .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
+                                            .WithMessage("Password is not in right format. Minimum eight characters, at least one uppercase letter, one lowercase letter and one number")
+                                            .When(x => !string.IsNullOrEmpty(x.Password));
         }
     }
 
@@ -57,6 +56,13 @@ namespace Zenith_API.Implementation.Validators
     {
         public UserInsertDtoValidator(ZenithContext ctx) : base(ctx)
         {
+            RuleFor(x => x.Password)
+                                            .NotEmpty()
+                                            .WithMessage("Password is required.")
+                                            .Matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
+                                            .WithMessage("Password is not in right format. Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+
+
             //Ako je must false onda ce vratiti gresku withMessage
             RuleFor(x => x.Email)
                 .Must(x => !ctx.Users.Any(u => u.Email == x && u.IsActive && u.DeletedAt == null))

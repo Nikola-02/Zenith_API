@@ -36,12 +36,16 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
                 throw new EntityNotFoundException(Context.Users.GetType().ToString(), Id);
             }
 
+            if (!string.IsNullOrEmpty(data.Password))
+            {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(data.Password);
+            }
+
             user.Username = data.Username;
             user.Email = data.Email;
             user.FirstName = data.FirstName;
             user.LastName = data.LastName;
-            user.Password = BCrypt.Net.BCrypt.HashPassword(data.Password);
-
+            
             Context.SaveChanges();
         }
     }
