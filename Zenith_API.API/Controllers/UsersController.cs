@@ -15,7 +15,6 @@ namespace Zenith_API.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("AllowAllOrigins")]
     public class UsersController : ControllerBase
     {
         private UseCaseHandler _handler;

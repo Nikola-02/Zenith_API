@@ -28,6 +28,14 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
                 throw new EntityNotFoundException(Context.Users.GetType().ToString(), Id);
             }
 
+            var playlistsToDelete = user.Playlists;
+
+            foreach (var playlist in playlistsToDelete)
+            {
+                playlist.IsActive = false;
+                playlist.DeletedAt = DateTime.UtcNow;
+            }
+
             user.IsActive = false;
             user.DeletedAt = DateTime.UtcNow;
 
