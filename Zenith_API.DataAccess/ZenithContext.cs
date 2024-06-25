@@ -32,7 +32,7 @@ namespace Zenith_API.DataAccess
 
         public ZenithContext()
         {
-            this._connectionString = "Data Source=DESKTOP-RJ8270A\\SQLEXPRESS;Initial Catalog=Zenith;TrustServerCertificate=true;Integrated security = true;";
+            this._connectionString = "Data Source=DESKTOP-CG6HMPT\\SQLEXPRESS;Initial Catalog=Zenith;TrustServerCertificate=true;Integrated security = true;";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

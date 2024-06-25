@@ -41,10 +41,14 @@ namespace Zenith_API.Implementation.UseCases.Commands.Users
                 UseCases = new List<UserUseCase>()
                 {
                     new UserUseCase() { UseCaseId = 2 },
+                    new UserUseCase() { UseCaseId = 28 },
+                    new UserUseCase() { UseCaseId = 29 },
                     new UserUseCase() { UseCaseId = 30 },
                     new UserUseCase() { UseCaseId = 31 },
                     new UserUseCase() { UseCaseId = 32 },
                     new UserUseCase() { UseCaseId = 33 },
+                    new UserUseCase() { UseCaseId = 34 },
+                    new UserUseCase() { UseCaseId = 35 },
                     new UserUseCase() { UseCaseId = 37 },
                     new UserUseCase() { UseCaseId = 40 },
                     new UserUseCase() { UseCaseId = 41 },
