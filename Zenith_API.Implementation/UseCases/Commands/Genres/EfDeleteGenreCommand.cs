@@ -29,6 +29,13 @@ namespace Zenith_API.Implementation.UseCases.Commands.Genres
                 throw new EntityNotFoundException(Context.Genres.GetType().ToString(), Id);
             }
 
+            var genresUsedByTracks = genre.Tracks.Any();
+
+            if (genresUsedByTracks)
+            {
+                throw new ConflictException("You cant delete this genre, because its used in tracks.");
+            }
+
             genre.IsActive = false;
             genre.DeletedAt = DateTime.UtcNow;
 

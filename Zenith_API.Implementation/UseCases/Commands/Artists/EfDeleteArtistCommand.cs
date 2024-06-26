@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.Artists;
 using Zenith_API.DataAccess;
+using Zenith_API.Domain;
 
 namespace Zenith_API.Implementation.UseCases.Commands.Artists
 {
@@ -26,6 +27,13 @@ namespace Zenith_API.Implementation.UseCases.Commands.Artists
             if (artist == null)
             {
                 throw new EntityNotFoundException(Context.Artists.GetType().ToString(), Id);
+            }
+
+            var artistUsedByTracks = artist.Tracks.Any();
+
+            if (artistUsedByTracks)
+            {
+                throw new ConflictException("You cant delete this artist, because its used in tracks.");
             }
 
             artist.IsActive = false;
