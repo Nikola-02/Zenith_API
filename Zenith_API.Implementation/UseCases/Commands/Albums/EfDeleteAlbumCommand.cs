@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.DataAccess;
+using Zenith_API.Domain;
 
 namespace Zenith_API.Implementation.UseCases.Commands.Albums
 {
@@ -26,6 +27,13 @@ namespace Zenith_API.Implementation.UseCases.Commands.Albums
             if (album == null)
             {
                 throw new EntityNotFoundException(Context.Albums.GetType().ToString(), Id);
+            }
+
+            var albumUsedByTracks = album.Tracks.Any();
+
+            if (albumUsedByTracks)
+            {
+                throw new ConflictException("You cant delete this album, because its used in tracks.");
             }
 
             album.IsActive = false;
