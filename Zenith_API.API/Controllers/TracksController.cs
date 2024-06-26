@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 using Zenith_API.Application.DTO.Albums;
@@ -7,7 +8,9 @@ using Zenith_API.Application.UseCases.Commands.Albums;
 using Zenith_API.Application.UseCases.Commands.Tracks;
 using Zenith_API.Application.UseCases.Queries.Albums;
 using Zenith_API.Application.UseCases.Queries.Tracks;
+using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,10 +22,14 @@ namespace Zenith_API.API.Controllers
     public class TracksController : ControllerBase
     {
         private UseCaseHandler _handler;
+        private ZenithContext _context;
+        public IMapper Mapper { get; }
 
-        public TracksController(UseCaseHandler handler)
+        public TracksController(IMapper mapper, UseCaseHandler handler, ZenithContext context)
         {
             _handler = handler;
+            _context = context;
+            Mapper = mapper;
         }
 
         // GET: api/<TracksController>
@@ -42,6 +49,17 @@ namespace Zenith_API.API.Controllers
             return Ok(_handler.HandleQuery(query, search));
         }
 
+        // GET: api/<TracksController>/popular
+        [HttpGet("popular")]
+        public IActionResult Get()
+        {
+            var popularTracksQuery = _context.Tracks.Where(x => x.IsActive && x.DeletedAt == null)
+            .OrderByDescending(x => x.Likes.Count).Take(3);
+
+
+            return Ok(Mapper.Map<List<TrackDTO>>(popularTracksQuery.ToList()));
+        }
+            
         // POST api/<TracksController>
         [Authorize]
         [HttpPost]
