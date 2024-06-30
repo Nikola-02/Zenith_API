@@ -9,7 +9,7 @@ Password: Admin1234
 http://localhost:5001/swagger
 
 # Getting started
-- Download database file and execute it in your DBMS, it will create database with data
+- Download database file and execute it in your DBMS, it will create database with data.
 
 # Overview
 Welcome to the Zenith Music Library API, an ASP.NET-based application, created using Clean Architecture, designed for music enthusiasts and developers alike. This robust API allows you to interact with a vast collection of songs, providing functionalities such as display, search, add, delete, update, playlist management, song liking, and streaming.
