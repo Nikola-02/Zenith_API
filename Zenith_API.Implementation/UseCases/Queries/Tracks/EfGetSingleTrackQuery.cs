@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Zenith_API.Application;
 using Zenith_API.Application.DTO;
 using Zenith_API.Application.DTO.Albums;
 using Zenith_API.Application.DTO.Artists;
@@ -15,14 +16,15 @@ using Zenith_API.Application.Exceptions;
 using Zenith_API.Application.UseCases.Queries.Tracks;
 using Zenith_API.DataAccess;
 using Zenith_API.Domain;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Zenith_API.Implementation.UseCases.Queries.Tracks
 {
     public class EfGetSingleTrackQuery : EfUseCaseMapper, IGetSingleTrackQuery
     {
-        public EfGetSingleTrackQuery(ZenithContext context, IMapper mapper) : base(context, mapper)
+        private readonly IApplicationActor _actor;
+        public EfGetSingleTrackQuery(ZenithContext context, IMapper mapper, IApplicationActor actor) : base(context, mapper)
         {
+            _actor = actor;
         }
 
         public int Id => 40;
@@ -42,7 +44,7 @@ namespace Zenith_API.Implementation.UseCases.Queries.Tracks
                 throw new EntityNotFoundException(Context.Tracks.GetType().ToString(), Id);
             }
 
-            return new TrackDTO
+            var singleTrack = new TrackDTO
             {
                 Id = track.Id,
                 Name = track.Name,
@@ -72,7 +74,8 @@ namespace Zenith_API.Implementation.UseCases.Queries.Tracks
                     Name = track.MediaType.Name,
                 },
                 Price = track.Prices.FirstOrDefault(p => p.IsActive && p.DeletedAt == null).Amount,
-                LikesCount = track.Likes.Count()
+                LikesCount = track.Likes.Count(),
+
             };
         }
     }
