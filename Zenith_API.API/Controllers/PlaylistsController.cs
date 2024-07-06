@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -12,6 +13,7 @@ using Zenith_API.Application.UseCases.Queries.Playlists;
 using Zenith_API.Application.UseCases.Queries.Tracks;
 using Zenith_API.DataAccess;
 using Zenith_API.Implementation;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,10 +25,14 @@ namespace Zenith_API.API.Controllers
     public class PlaylistsController : ControllerBase
     {
         private UseCaseHandler _handler;
+        private ZenithContext _context;
+        private IMapper _mapper;
 
-        public PlaylistsController(UseCaseHandler handler)
+        public PlaylistsController(IMapper mapper, ZenithContext context, UseCaseHandler handler)
         {
+            _context = context;
             _handler = handler;
+            _mapper = mapper;
         }
 
         //Vracanje svih plejlista za "administratora"
@@ -45,6 +51,23 @@ namespace Zenith_API.API.Controllers
                                  [FromServices] IGetPlaylistForUserQuery query)
         {
             return Ok(_handler.HandleQuery(query, search));
+        }
+
+        // GET api/<PlaylistsController>/
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var query = _context.Playlists.Find(id);
+
+            if (query == null)
+            {
+                return NotFound();
+            }
+
+            var playlistDto = _mapper.Map<PlaylistDTO>(query);
+
+            return Ok(playlistDto);
         }
 
         // POST api/<PlaylistsController>
