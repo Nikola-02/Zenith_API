@@ -77,6 +77,8 @@ namespace Zenith_API.Implementation.UseCases.Queries.Tracks
                 LikesCount = track.Likes.Count(),
 
             };
+
+            return singleTrack;
         }
     }
 }
